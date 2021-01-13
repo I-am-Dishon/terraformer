@@ -1402,7 +1402,7 @@ Example:
  ./terraformer import gitlab  --resources=repositories --filter=repository=id1:id2:id4 --token=YOUR_TOKEN // or GITHUB_TOKEN in env
 ```
 
-Supports only organizational resources. List of supported resources:
+Here is the list of resources which are currently supported by Gitlab provider v3.3.0:
 
 
 *   `labels`
