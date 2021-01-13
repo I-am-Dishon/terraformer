@@ -1404,26 +1404,46 @@ Example:
 
 Supports only organizational resources. List of supported resources:
 
-*   `members`
-    * `github_membership`
-*   `organization_blocks`
-    * `github_organization_block`
+
+*   `labels`
+    * `gitlab_label`
 *   `projects`
     * `gitlab_project`
-*   `organization_webhooks`
-    * `github_organization_webhook`
-*   `repositories`
-    * `github_repository`
-    * `github_repository_webhook`
-    * `github_branch_protection`
-    * `github_repository_collaborator`
-    * `github_repository_deploy_key`
-*   `teams`
-    * `github_team`
-    * `github_team_membership`
+    * `gitlab_project_approval_rule`
+    * `gitlab_project_hook`
+    * `gitlab_project_membership`
+    * `gitlab_project_cluster`
+    * `gitlab_project_variable`
+    * `gitlab_project_shared_group`
+    * `gitlab_project_mirror`
+    * `gitlab_project_levels_mr_approvals`
+*   `groups`
+    * `gitlab_group`
+    * `gitlab_group_membership`
+    * `gitlab_group_cluster`
+    * `gitlab_group_label`
+    * `gitlab_group_ldap_link`
+    * `gitlab_group_variable`
+*   `gitlab_deploy`
+    * `gitlab_deploy_key`
+    * `gitlab_deploy_key_enable`
     * `github_team_repository`
 *   `user`
     * `gitlab_user`
+*   `pipelines`
+    * `gitlab_pipeline_schedule`
+    * `gitlab_pipeline_trigger`
+    * `gitlab_pipeline_schedule_variable`
+*   `gitlab_service`
+    * `gitlab_service_github`
+    * `gitlab_service_jira`
+    * `gitlab_service_slack`
+    * `gitlab_service_pipelines_email`
+*   `protection`
+    * `gitlab_tag_protection`
+    * `gitlab_branch_protection`
+*   `instance`
+    * `gitlab_instance_cluster`
 
 ### Use with Datadog
 
