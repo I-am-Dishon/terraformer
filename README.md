@@ -40,6 +40,7 @@ A CLI tool that generates `tf`/`json` and `tfstate` files based on existing infr
         * [Cloudflare](#use-with-cloudflare)
     * VCS
         * [GitHub](#use-with-github)
+        * [Gitlab](#use-with-gitlab)
     * Monitoring & System Management
         * [Datadog](#use-with-datadog)
         * [New Relic](#use-with-new-relic)
@@ -1392,6 +1393,37 @@ Supports only organizational resources. List of supported resources:
 Notes:
 * Terraformer can't get webhook secrets from the GitHub API. If you use a secret token in any of your webhooks, running `terraform plan` will result in a change being detected:
 => `configuration.#: "1" => "0"` in tfstate only.
+
+### Use with Gitlab
+Example:
+
+```
+ ./terraformer import gitlab  --resources=repositories --token=YOUR_TOKEN // or GITHUB_TOKEN in env
+ ./terraformer import gitlab  --resources=repositories --filter=repository=id1:id2:id4 --token=YOUR_TOKEN // or GITHUB_TOKEN in env
+```
+
+Supports only organizational resources. List of supported resources:
+
+*   `members`
+    * `github_membership`
+*   `organization_blocks`
+    * `github_organization_block`
+*   `projects`
+    * `gitlab_project`
+*   `organization_webhooks`
+    * `github_organization_webhook`
+*   `repositories`
+    * `github_repository`
+    * `github_repository_webhook`
+    * `github_branch_protection`
+    * `github_repository_collaborator`
+    * `github_repository_deploy_key`
+*   `teams`
+    * `github_team`
+    * `github_team_membership`
+    * `github_team_repository`
+*   `user`
+    * `gitlab_user`
 
 ### Use with Datadog
 
