@@ -42,14 +42,6 @@ func (u UserGenerator) createResources(userList []*gitlab.User) []terraformutils
 	}
 	return resources
 }
-// {
-//     "id": 1,
-//     "username": "john_smith",
-//     "name": "John Smith",
-//     "state": "active",
-//     "avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg",
-//     "web_url": "http://localhost:3000/john_smith"
-//   }
 
 func (u *UserGenerator) InitResources() error {
 

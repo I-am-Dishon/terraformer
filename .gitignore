@@ -1,6 +1,6 @@
 .idea
 generated
-terraformer
+terraformer*
 .DS_Store
 .terraform
 .vscode
