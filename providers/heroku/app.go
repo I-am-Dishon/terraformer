@@ -28,12 +28,7 @@ type AppGenerator struct {
 func (g AppGenerator) createResources(appList []heroku.App) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, app := range appList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			app.ID,
-			app.Name,
-			"heroku_app",
-			"heroku",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, app.ID, app.Name, "heroku_app", "heroku", []string{}))
 	}
 	return resources
 }

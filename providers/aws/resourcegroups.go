@@ -39,12 +39,7 @@ func (g *ResourceGroupsGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, group := range p.CurrentPage().Groups {
 			groupName := aws.StringValue(group.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				groupName,
-				groupName,
-				"aws_resourcegroups_group",
-				"aws",
-				resourcegroupsAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, groupName, groupName, "aws_resourcegroups_group", "aws", resourcegroupsAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

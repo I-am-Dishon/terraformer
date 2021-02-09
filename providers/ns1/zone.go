@@ -30,12 +30,7 @@ func (g *ZoneGenerator) createZoneResources(client *ns1.APIClient) error {
 	}
 
 	for _, zone := range zones {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			zone.Id,
-			zone.Id,
-			"ns1_zone",
-			"ns1",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, zone.Id, zone.Id, "ns1_zone", "ns1", []string{}))
 	}
 
 	return nil

@@ -31,12 +31,7 @@ func (g *BudgetsGenerator) createResources(budgets []budgets.Budget, account *st
 	var resources []terraformutils.Resource
 	for _, budget := range budgets {
 		resourceName := aws.StringValue(budget.BudgetName)
-		resources = append(resources, terraformutils.NewSimpleResource(
-			fmt.Sprintf("%s:%s", *account, resourceName),
-			resourceName,
-			"aws_budgets_budget",
-			"aws",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", *account, resourceName), resourceName, "aws_budgets_budget", "aws", []string{}))
 	}
 	return resources
 }

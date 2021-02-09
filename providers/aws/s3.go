@@ -76,12 +76,7 @@ func (g *S3Generator) createResources(config aws.Config, buckets *s3.ListBuckets
 				continue
 			}
 			// if bucket policy exist create TerraformResource with bucket name as ID
-			resources = append(resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_s3_bucket_policy",
-				"aws",
-				S3AllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_s3_bucket_policy", "aws"))
 		}
 	}
 	return resources

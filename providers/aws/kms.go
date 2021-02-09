@@ -68,13 +68,7 @@ func (g *KmsGenerator) addAliases(client *kms.Client) error {
 	p := kms.NewListAliasesPaginator(client.ListAliasesRequest(&kms.ListAliasesInput{}))
 	for p.Next(context.Background()) {
 		for _, alias := range p.CurrentPage().Aliases {
-			resource := terraformutils.NewSimpleResource(
-				*alias.AliasName,
-				*alias.AliasName,
-				"aws_kms_alias",
-				"aws",
-				kmsAllowEmptyValues,
-			)
+			resource := terraformutils.NewSimpleResource(0, *alias.AliasName, *alias.AliasName, "aws_kms_alias", "aws", kmsAllowEmptyValues, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

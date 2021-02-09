@@ -52,13 +52,7 @@ func (g *MembersGenerator) InitResources() error {
 		}
 
 		for _, member := range members {
-			resource := terraformutils.NewSimpleResource(
-				g.Args["organization"].(string)+":"+member.GetLogin(),
-				member.GetLogin(),
-				"github_membership",
-				"github",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, g.Args["organization"].(string)+":"+member.GetLogin(), member.GetLogin(), "github_membership", "github", []string{}, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

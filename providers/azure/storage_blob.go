@@ -99,12 +99,7 @@ func (g StorageBlobGenerator) listStorageBlobs() ([]terraformutils.Resource, err
 		}
 
 		for _, blobItem := range blobsList {
-			storageBlobsResources = append(storageBlobsResources, terraformutils.NewSimpleResource(
-				fmt.Sprintf(blobIDFormat, storageAccountName, containerName, blobItem.Name),
-				blobItem.Name,
-				"azurerm_storage_blob",
-				"azurerm",
-				[]string{}))
+			storageBlobsResources = append(storageBlobsResources, terraformutils.NewSimpleResource(0, fmt.Sprintf(blobIDFormat, storageAccountName, containerName, blobItem.Name), blobItem.Name, "azurerm_storage_blob", "azurerm", []string{}))
 		}
 	}
 

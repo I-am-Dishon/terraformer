@@ -35,12 +35,7 @@ func (g TeamMemberGenerator) createResources(svc *heroku.Service, teamList []her
 			log.Println(err)
 		}
 		for _, member := range output {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				fmt.Sprintf("%s:%s", team.ID, member.Email),
-				member.ID,
-				"heroku_team_member",
-				"heroku",
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", team.ID, member.Email), member.ID, "heroku_team_member", "heroku", []string{}))
 		}
 	}
 	return resources

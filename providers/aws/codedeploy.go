@@ -38,12 +38,7 @@ func (g *CodeDeployGenerator) InitResources() error {
 	var resources []terraformutils.Resource
 	for p.Next(context.Background()) {
 		for _, application := range p.CurrentPage().Applications {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				fmt.Sprintf(":%s", application),
-				application,
-				"aws_codedeploy_app",
-				"aws",
-				codedeployAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, fmt.Sprintf(":%s", application), application, "aws_codedeploy_app", "aws", codedeployAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

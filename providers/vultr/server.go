@@ -28,12 +28,7 @@ type ServerGenerator struct {
 func (g ServerGenerator) createResources(serverList []govultr.Server) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, server := range serverList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			server.InstanceID,
-			server.InstanceID,
-			"vultr_server",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, server.InstanceID, server.InstanceID, "vultr_server", "vultr", []string{}))
 	}
 	return resources
 }

@@ -32,12 +32,7 @@ func (g *FirewallGroupGenerator) loadFirewallGroups(client *govultr.Client) ([]g
 		return nil, err
 	}
 	for _, firewallGroup := range firewallGroups {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			firewallGroup.FirewallGroupID,
-			firewallGroup.FirewallGroupID,
-			"vultr_firewall_group",
-			"vultr",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, firewallGroup.FirewallGroupID, firewallGroup.FirewallGroupID, "vultr_firewall_group", "vultr", []string{}))
 	}
 	return firewallGroups, nil
 }

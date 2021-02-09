@@ -36,13 +36,7 @@ func (g *AlbGenerator) loadLB(svc *elasticloadbalancingv2.Client) error {
 	for p.Next(context.Background()) {
 		for _, lb := range p.CurrentPage().LoadBalancers {
 			resourceName := aws.StringValue(lb.LoadBalancerName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(lb.LoadBalancerArn),
-				resourceName,
-				"aws_lb",
-				"aws",
-				AlbAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(lb.LoadBalancerArn), resourceName, "aws_lb", "aws", AlbAllowEmptyValues, ))
 			err := g.loadLBListener(svc, lb.LoadBalancerArn)
 			if err != nil {
 				log.Println(err)
@@ -57,13 +51,7 @@ func (g *AlbGenerator) loadLBListener(svc *elasticloadbalancingv2.Client, loadBa
 	for p.Next(context.Background()) {
 		for _, ls := range p.CurrentPage().Listeners {
 			resourceName := aws.StringValue(ls.ListenerArn)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_lb_listener",
-				"aws",
-				AlbAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_lb_listener", "aws", AlbAllowEmptyValues, ))
 			err := g.loadLBListenerRule(svc, ls.ListenerArn)
 			if err != nil {
 				log.Println(err)
@@ -91,13 +79,7 @@ func (g *AlbGenerator) loadLBListenerRule(svc *elasticloadbalancingv2.Client, li
 		for _, lsr := range lsrs.Rules {
 			if !aws.BoolValue(lsr.IsDefault) {
 				resourceName := aws.StringValue(lsr.RuleArn)
-				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-					resourceName,
-					resourceName,
-					"aws_lb_listener_rule",
-					"aws",
-					AlbAllowEmptyValues,
-				))
+				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_lb_listener_rule", "aws", AlbAllowEmptyValues, ))
 			}
 		}
 		marker = lsrs.NextMarker
@@ -141,13 +123,7 @@ func (g *AlbGenerator) loadLBTargetGroup(svc *elasticloadbalancingv2.Client) err
 	for p.Next(context.Background()) {
 		for _, tg := range p.CurrentPage().TargetGroups {
 			resourceName := aws.StringValue(tg.TargetGroupName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(tg.TargetGroupArn),
-				resourceName,
-				"aws_lb_target_group",
-				"aws",
-				AlbAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(tg.TargetGroupArn), resourceName, "aws_lb_target_group", "aws", AlbAllowEmptyValues, ))
 			err := g.loadTargetGroupTargets(svc, tg.TargetGroupArn)
 			if err != nil {
 				log.Println(err)

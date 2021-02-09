@@ -28,12 +28,7 @@ type SSHKeyGenerator struct {
 func (g SSHKeyGenerator) createResources(keyList []govultr.SSHKey) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, key := range keyList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			key.SSHKeyID,
-			key.SSHKeyID,
-			"vultr_ssh_key",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, key.SSHKeyID, key.SSHKeyID, "vultr_ssh_key", "vultr"))
 	}
 	return resources
 }

@@ -33,56 +33,31 @@ type IAMGenerator struct {
 
 func (g IAMGenerator) loadUserPolicies(policyID string, user string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", user, policyID),
-		policyID,
-		"ibm_iam_user_policy",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", user, policyID), policyID, "ibm_iam_user_policy", "ibm", []string{})
 	return resources
 }
 
 func (g IAMGenerator) loadAccessGroups(grpID, grpName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", grpID, grpName),
-		grpName,
-		"ibm_iam_access_group",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", grpID, grpName), grpName, "ibm_iam_access_group", "ibm", []string{})
 	return resources
 }
 
 func (g IAMGenerator) loadAccessGroupMembers(grpID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", grpID, grpID),
-		grpID,
-		"ibm_iam_access_group_members",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", grpID, grpID), grpID, "ibm_iam_access_group_members", "ibm", []string{})
 	return resources
 }
 
 func (g IAMGenerator) loadAccessGroupPolicies(grpID, policyID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", grpID, policyID),
-		policyID,
-		"ibm_iam_access_group_policy",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, policyID, "ibm_iam_access_group_policy", "ibm", []string{})
 	return resources
 }
 
 func (g IAMGenerator) loadAccessGroupDynamicPolicies(grpID, ruleID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", grpID, ruleID),
-		ruleID,
-		"ibm_iam_access_group_dynamic_rule",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", grpID, ruleID), ruleID, "ibm_iam_access_group_dynamic_rule", "ibm", []string{})
 	return resources
 }
 

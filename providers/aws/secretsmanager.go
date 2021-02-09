@@ -40,12 +40,7 @@ func (g *SecretsManagerGenerator) InitResources() error {
 		for _, secret := range p.CurrentPage().SecretList {
 			secretArn := aws.StringValue(secret.ARN)
 			secretName := aws.StringValue(secret.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				secretArn,
-				secretName,
-				"aws_secretsmanager_secret",
-				"aws",
-				secretsmanagerAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, secretArn, secretName, "aws_secretsmanager_secret", "aws", secretsmanagerAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

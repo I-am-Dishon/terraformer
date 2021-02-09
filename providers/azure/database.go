@@ -95,12 +95,7 @@ func (g *DatabasesGenerator) createMariaDBConfigurationResources(servers []maria
 		}
 
 		for _, config := range *configs.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*config.ID,
-				*config.Name+"-"+*server.Name,
-				"azurerm_mariadb_configuration",
-				g.ProviderName,
-				[]string{"value"}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *config.ID, *config.Name+"-"+*server.Name, "azurerm_mariadb_configuration", g.ProviderName, []string{"value"}))
 		}
 	}
 
@@ -127,12 +122,7 @@ func (g *DatabasesGenerator) createMariaDBDatabaseResources(servers []mariadb.Se
 		}
 
 		for _, database := range *databases.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*database.ID,
-				*database.Name+"-"+*server.Name,
-				"azurerm_mariadb_database",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *database.ID, *database.Name+"-"+*server.Name, "azurerm_mariadb_database", g.ProviderName, []string{}))
 		}
 	}
 
@@ -158,12 +148,7 @@ func (g *DatabasesGenerator) createMariaDBFirewallRuleResources(servers []mariad
 			return nil, err
 		}
 		for _, rule := range *rules.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_mariadb_firewall_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_mariadb_firewall_rule", g.ProviderName, []string{}))
 		}
 	}
 
@@ -190,12 +175,7 @@ func (g *DatabasesGenerator) createMariaDBVirtualNetworkRuleResources(servers []
 		}
 		for iter.NotDone() {
 			rule := iter.Value()
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_mariadb_virtual_network_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_mariadb_virtual_network_rule", g.ProviderName, []string{}))
 
 			if err := iter.NextWithContext(ctx); err != nil {
 				return nil, err
@@ -269,12 +249,7 @@ func (g *DatabasesGenerator) createMySQLConfigurationResources(servers []mysql.S
 			return nil, err
 		}
 		for _, config := range *configs.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*config.ID,
-				*config.Name+"-"+*server.Name,
-				"azurerm_mysql_configuration",
-				g.ProviderName,
-				[]string{"value"}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *config.ID, *config.Name+"-"+*server.Name, "azurerm_mysql_configuration", g.ProviderName, []string{"value"}))
 		}
 	}
 
@@ -301,12 +276,7 @@ func (g *DatabasesGenerator) createMySQLDatabaseResources(servers []mysql.Server
 		}
 
 		for _, database := range *databases.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*database.ID,
-				*database.Name+"-"+*server.Name,
-				"azurerm_mysql_database",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *database.ID, *database.Name+"-"+*server.Name, "azurerm_mysql_database", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -332,12 +302,7 @@ func (g *DatabasesGenerator) createMySQLFirewallRuleResources(servers []mysql.Se
 		}
 
 		for _, rule := range *rules.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_mysql_firewall_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_mysql_firewall_rule", g.ProviderName, []string{}))
 		}
 	}
 
@@ -366,12 +331,7 @@ func (g *DatabasesGenerator) createMySQLVirtualNetworkRuleResources(servers []my
 
 		for iter.NotDone() {
 			rule := iter.Value()
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_mysql_virtual_network_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_mysql_virtual_network_rule", g.ProviderName, []string{}))
 
 			if err := iter.NextWithContext(ctx); err != nil {
 				return nil, err
@@ -447,12 +407,7 @@ func (g *DatabasesGenerator) createPostgreSQLDatabaseResources(servers []postgre
 		}
 
 		for _, database := range *databases.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*database.ID,
-				*database.Name+"-"+*server.Name,
-				"azurerm_postgresql_database",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *database.ID, *database.Name+"-"+*server.Name, "azurerm_postgresql_database", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -477,12 +432,7 @@ func (g *DatabasesGenerator) createPostgreSQLConfigurationResources(servers []po
 		}
 
 		for _, config := range *configs.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*config.ID,
-				*config.Name+"-"+*server.Name,
-				"azurerm_postgresql_configuration",
-				g.ProviderName,
-				[]string{"value"}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *config.ID, *config.Name+"-"+*server.Name, "azurerm_postgresql_configuration", g.ProviderName, []string{"value"}))
 		}
 	}
 	return resources, nil
@@ -508,12 +458,7 @@ func (g *DatabasesGenerator) createPostgreSQLFirewallRuleResources(servers []pos
 		}
 
 		for _, rule := range *rules.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_postgresql_firewall_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_postgresql_firewall_rule", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -540,12 +485,7 @@ func (g *DatabasesGenerator) createPostgreSQLVirtualNetworkRuleResources(servers
 
 		for rulePages.NotDone() {
 			rule := rulePages.Value()
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_postgresql_virtual_network_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_postgresql_virtual_network_rule", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -622,12 +562,7 @@ func (g *DatabasesGenerator) createSQLDatabaseResources(servers []sql.Server) ([
 		}
 
 		for _, database := range *databases.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*database.ID,
-				*database.Name+"-"+*server.Name,
-				"azurerm_sql_database",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *database.ID, *database.Name+"-"+*server.Name, "azurerm_sql_database", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -653,12 +588,7 @@ func (g *DatabasesGenerator) createSQLFirewallRuleResources(servers []sql.Server
 		}
 
 		for _, rule := range *rules.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_sql_firewall_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_sql_firewall_rule", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -685,12 +615,7 @@ func (g *DatabasesGenerator) createSQLVirtualNetworkRuleResources(servers []sql.
 
 		for ruleIter.NotDone() {
 			rule := ruleIter.Value()
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*rule.ID,
-				*rule.Name,
-				"azurerm_sql_virtual_network_rule",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *rule.ID, *rule.Name, "azurerm_sql_virtual_network_rule", g.ProviderName, []string{}))
 		}
 		if err := ruleIter.NextWithContext(ctx); err != nil {
 			return nil, err
@@ -719,12 +644,7 @@ func (g *DatabasesGenerator) createSQLElasticPoolResources(servers []sql.Server)
 		}
 
 		for _, pool := range *pools.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*pool.ID,
-				*pool.Name,
-				"azurerm_sql_elasticpool",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *pool.ID, *pool.Name, "azurerm_sql_elasticpool", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -753,12 +673,7 @@ func (g *DatabasesGenerator) createSQLFailoverResources(servers []sql.Server) ([
 		for iter.NotDone() {
 			failoverGroup := iter.Value()
 
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*failoverGroup.ID,
-				*failoverGroup.Name,
-				"azurerm_sql_failover_group",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *failoverGroup.ID, *failoverGroup.Name, "azurerm_sql_failover_group", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil
@@ -785,12 +700,7 @@ func (g *DatabasesGenerator) createSQLADAdministratorResources(servers []sql.Ser
 		}
 
 		for _, administrator := range *administrators.Value {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*administrator.ID,
-				*administrator.Name,
-				"azurerm_sql_active_directory_administrator",
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *administrator.ID, *administrator.Name, "azurerm_sql_active_directory_administrator", g.ProviderName, []string{}))
 		}
 	}
 	return resources, nil

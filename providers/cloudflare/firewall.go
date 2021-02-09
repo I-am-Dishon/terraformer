@@ -69,13 +69,7 @@ func (g *FirewallGenerator) createAccountAccessRuleResources(api *cf.API) ([]ter
 
 	totalPages := rules.TotalPages
 	for _, rule := range rules.Result {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			rule.ID,
-			rule.ID,
-			"cloudflare_access_rule",
-			"cloudflare",
-			[]string{},
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, rule.ID, rule.ID, "cloudflare_access_rule", "cloudflare", []string{}, ))
 	}
 
 	for page := 2; page <= totalPages; page++ {
@@ -84,13 +78,7 @@ func (g *FirewallGenerator) createAccountAccessRuleResources(api *cf.API) ([]ter
 			return resources, err
 		}
 		for _, rule := range rules.Result {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				rule.ID,
-				rule.ID,
-				"cloudflare_access_rule",
-				"cloudflare",
-				[]string{},
-			))
+			resources = append(resources, terraformutils.NewSimpleResource(0, rule.ID, rule.ID, "cloudflare_access_rule", "cloudflare", []string{}, ))
 		}
 	}
 
@@ -202,12 +190,7 @@ func (g *FirewallGenerator) createRateLimitResources(api *cf.API, zoneID, zoneNa
 		return resources, err
 	}
 	for _, rateLimit := range rateLimits {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			rateLimit.ID,
-			fmt.Sprintf("%s_%s", zoneID, rateLimit.ID),
-			"cloudflare_rate_limit",
-			"cloudflare",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, rateLimit.ID, fmt.Sprintf("%s_%s", zoneID, rateLimit.ID), "cloudflare_rate_limit", "cloudflare", []string{}))
 	}
 
 	return resources, nil

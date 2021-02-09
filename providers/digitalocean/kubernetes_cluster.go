@@ -40,12 +40,7 @@ func (g *KubernetesClusterGenerator) loadKubernetesClusters(ctx context.Context,
 		}
 
 		for _, cluster := range clusters {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				cluster.ID,
-				cluster.Name,
-				"digitalocean_kubernetes_cluster",
-				"digitalocean",
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, cluster.ID, cluster.Name, "digitalocean_kubernetes_cluster", "digitalocean", []string{}))
 			list = append(list, cluster)
 		}
 

@@ -36,12 +36,7 @@ func (g ScaleSetGenerator) createResourcesByResourceGroup(ctx context.Context, c
 	var resources []terraformutils.Resource
 	for scaleSetIterator.NotDone() {
 		scaleSet := scaleSetIterator.Value()
-		newResource := terraformutils.NewSimpleResource(
-			*scaleSet.ID,
-			*scaleSet.Name,
-			"azurerm_virtual_machine_scale_set",
-			"azurerm",
-			[]string{})
+		newResource := terraformutils.NewSimpleResource(0, *scaleSet.ID, *scaleSet.Name, "azurerm_virtual_machine_scale_set", "azurerm", []string{})
 		resources = append(resources, newResource)
 		if err := scaleSetIterator.Next(); err != nil {
 			log.Println(err)
@@ -59,12 +54,7 @@ func (g ScaleSetGenerator) createResources(ctx context.Context, client compute.V
 	var resources []terraformutils.Resource
 	for scaleSetIterator.NotDone() {
 		scaleSet := scaleSetIterator.Value()
-		newResource := terraformutils.NewSimpleResource(
-			*scaleSet.ID,
-			*scaleSet.Name,
-			"azurerm_virtual_machine_scale_set",
-			"azurerm",
-			[]string{})
+		newResource := terraformutils.NewSimpleResource(0, *scaleSet.ID, *scaleSet.Name, "azurerm_virtual_machine_scale_set", "azurerm", []string{})
 		resources = append(resources, newResource)
 		if err := scaleSetIterator.Next(); err != nil {
 			log.Println(err)

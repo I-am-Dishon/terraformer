@@ -34,13 +34,7 @@ func (g *TransitGatewayGenerator) getTransitGateways(svc *ec2.Client) error {
 	p := ec2.NewDescribeTransitGatewaysPaginator(svc.DescribeTransitGatewaysRequest(&ec2.DescribeTransitGatewaysInput{}))
 	for p.Next(context.Background()) {
 		for _, tgw := range p.CurrentPage().TransitGateways {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(tgw.TransitGatewayId),
-				aws.StringValue(tgw.TransitGatewayId),
-				"aws_ec2_transit_gateway",
-				"aws",
-				tgwAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, 0, aws.StringValue(tgw.TransitGatewayId), aws.StringValue(tgw.TransitGatewayId), "aws_ec2_transit_gateway", "aws", ))
 		}
 	}
 	return p.Err()
@@ -54,13 +48,7 @@ func (g *TransitGatewayGenerator) getTransitGatewayRouteTables(svc *ec2.Client) 
 			if *tgwrt.DefaultAssociationRouteTable {
 				continue
 			} else {
-				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-					aws.StringValue(tgwrt.TransitGatewayRouteTableId),
-					aws.StringValue(tgwrt.TransitGatewayRouteTableId),
-					"aws_ec2_transit_gateway_route_table",
-					"aws",
-					tgwAllowEmptyValues,
-				))
+				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(tgwrt.TransitGatewayRouteTableId), aws.StringValue(tgwrt.TransitGatewayRouteTableId), "aws_ec2_transit_gateway_route_table", "aws", tgwAllowEmptyValues, ))
 			}
 		}
 	}
@@ -71,13 +59,7 @@ func (g *TransitGatewayGenerator) getTransitGatewayVpcAttachments(svc *ec2.Clien
 	p := ec2.NewDescribeTransitGatewayVpcAttachmentsPaginator(svc.DescribeTransitGatewayVpcAttachmentsRequest(&ec2.DescribeTransitGatewayVpcAttachmentsInput{}))
 	for p.Next(context.Background()) {
 		for _, tgwa := range p.CurrentPage().TransitGatewayVpcAttachments {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(tgwa.TransitGatewayAttachmentId),
-				aws.StringValue(tgwa.TransitGatewayAttachmentId),
-				"aws_ec2_transit_gateway_vpc_attachment",
-				"aws",
-				tgwAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(tgwa.TransitGatewayAttachmentId), aws.StringValue(tgwa.TransitGatewayAttachmentId), "aws_ec2_transit_gateway_vpc_attachment", "aws", tgwAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

@@ -51,12 +51,7 @@ func (g *EfsGenerator) loadFileSystem(svc *efs.Client) error {
 	p := efs.NewDescribeFileSystemsPaginator(svc.DescribeFileSystemsRequest(&efs.DescribeFileSystemsInput{}))
 	for p.Next(context.Background()) {
 		for _, fileSystem := range p.CurrentPage().FileSystems {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(fileSystem.FileSystemId),
-				aws.StringValue(fileSystem.FileSystemId),
-				"aws_efs_file_system",
-				"aws",
-				efsAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(fileSystem.FileSystemId), aws.StringValue(fileSystem.FileSystemId), "aws_efs_file_system", "aws", efsAllowEmptyValues))
 
 			targetsResponse, err := svc.DescribeMountTargetsRequest(&efs.DescribeMountTargetsInput{
 				FileSystemId: fileSystem.FileSystemId,
@@ -66,12 +61,7 @@ func (g *EfsGenerator) loadFileSystem(svc *efs.Client) error {
 				continue
 			}
 			for _, mountTarget := range targetsResponse.MountTargets {
-				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-					aws.StringValue(mountTarget.MountTargetId),
-					aws.StringValue(mountTarget.MountTargetId),
-					"aws_efs_mount_target",
-					"aws",
-					efsAllowEmptyValues))
+				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(mountTarget.MountTargetId), aws.StringValue(mountTarget.MountTargetId), "aws_efs_mount_target", "aws", efsAllowEmptyValues))
 			}
 
 			policyResponse, err := svc.DescribeFileSystemPolicyRequest(&efs.DescribeFileSystemPolicyInput{
@@ -105,12 +95,7 @@ func (g *EfsGenerator) loadMountTarget(svc *efs.Client) error {
 	for p.Next(context.Background()) {
 		for _, fileSystem := range p.CurrentPage().FileSystems {
 			id := aws.StringValue(fileSystem.FileSystemId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				id,
-				id,
-				"aws_efs_file_system",
-				"aws",
-				efsAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, id, id, "aws_efs_file_system", "aws", efsAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -121,12 +106,7 @@ func (g *EfsGenerator) loadAccessPoint(svc *efs.Client) error {
 	for p.Next(context.Background()) {
 		for _, fileSystem := range p.CurrentPage().AccessPoints {
 			id := aws.StringValue(fileSystem.AccessPointId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				id,
-				id,
-				"aws_efs_access_point",
-				"aws",
-				efsAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, id, id, "aws_efs_access_point", "aws", efsAllowEmptyValues))
 		}
 	}
 	return p.Err()

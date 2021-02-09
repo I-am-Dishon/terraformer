@@ -49,13 +49,7 @@ func (g *SnsGenerator) InitResources() error {
 			arnParts := strings.Split(aws.StringValue(topic.TopicArn), ":")
 			topicName := arnParts[len(arnParts)-1]
 
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(topic.TopicArn),
-				topicName,
-				"aws_sns_topic",
-				"aws",
-				snsAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(topic.TopicArn), topicName, "aws_sns_topic", "aws", snsAllowEmptyValues, ))
 
 			topicSubsPage := sns.NewListSubscriptionsByTopicPaginator(svc.ListSubscriptionsByTopicRequest(&sns.ListSubscriptionsByTopicInput{
 				TopicArn: topic.TopicArn,
@@ -66,13 +60,7 @@ func (g *SnsGenerator) InitResources() error {
 					subscriptionID := subscriptionArnParts[len(subscriptionArnParts)-1]
 
 					if g.isSupportedSubscription(aws.StringValue(subscription.Protocol), subscriptionID) {
-						g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-							aws.StringValue(subscription.SubscriptionArn),
-							"subscription-"+subscriptionID,
-							"aws_sns_topic_subscription",
-							"aws",
-							snsAllowEmptyValues,
-						))
+						g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(subscription.SubscriptionArn), "subscription-"+subscriptionID, "aws_sns_topic_subscription", "aws", snsAllowEmptyValues, ))
 					}
 				}
 			}

@@ -29,12 +29,7 @@ type VolumeGenerator struct {
 func (g VolumeGenerator) createResources(volumeList []linodego.Volume) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, volume := range volumeList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(volume.ID),
-			strconv.Itoa(volume.ID),
-			"linode_volume",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(volume.ID), strconv.Itoa(volume.ID), "linode_volume", "linode", []string{}))
 	}
 	return resources
 }

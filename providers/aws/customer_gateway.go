@@ -32,13 +32,7 @@ type CustomerGatewayGenerator struct {
 func (CustomerGatewayGenerator) createResources(cgws *ec2.DescribeCustomerGatewaysResponse) []terraformutils.Resource {
 	resources := []terraformutils.Resource{}
 	for _, cgws := range cgws.CustomerGateways {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(cgws.CustomerGatewayId),
-			aws.StringValue(cgws.CustomerGatewayId),
-			"aws_customer_gateway",
-			"aws",
-			customerGatewayAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(cgws.CustomerGatewayId), aws.StringValue(cgws.CustomerGatewayId), "aws_customer_gateway", "aws", customerGatewayAllowEmptyValues, ))
 	}
 	return resources
 }

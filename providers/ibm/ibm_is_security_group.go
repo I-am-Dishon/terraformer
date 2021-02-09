@@ -30,23 +30,13 @@ type SecurityGroupGenerator struct {
 
 func (g SecurityGroupGenerator) createSecurityGroupResources(sgID, sgName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		sgID,
-		sgName,
-		"ibm_is_security_group",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, sgID, sgName, "ibm_is_security_group", "ibm", []string{})
 	return resources
 }
 
 func (g SecurityGroupGenerator) createSecurityGroupRuleResources(sgID, sgRuleID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s.%s", sgID, sgRuleID),
-		sgRuleID,
-		"ibm_is_security_group_rule",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s.%s", sgID, sgRuleID), sgRuleID, "ibm_is_security_group_rule", "ibm", []string{})
 	return resources
 }
 

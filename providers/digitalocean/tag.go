@@ -58,12 +58,7 @@ func (g TagGenerator) listTags(ctx context.Context, client *godo.Client) ([]godo
 func (g TagGenerator) createResources(tagList []godo.Tag) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, tag := range tagList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			tag.Name,
-			tag.Name,
-			"digitalocean_tag",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, tag.Name, tag.Name, "digitalocean_tag", "digitalocean", []string{}))
 	}
 	return resources
 }

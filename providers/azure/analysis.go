@@ -49,12 +49,7 @@ func (g *AnalysisGenerator) listServiceServers() ([]terraformutils.Resource, err
 		return nil, err
 	}
 	for _, svr := range *servers.Value {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*svr.ID,
-			*svr.Name,
-			"azurerm_analysis_services_server",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *svr.ID, *svr.Name, "azurerm_analysis_services_server", g.ProviderName, []string{}))
 	}
 
 	return resources, nil

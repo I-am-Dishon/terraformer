@@ -34,19 +34,9 @@ func (g VirtualMachineGenerator) createResources(virtualMachineListResultIterato
 		vm := virtualMachineListResultIterator.Value()
 		var newResource terraformutils.Resource
 		if vm.VirtualMachineProperties.OsProfile.WindowsConfiguration != nil {
-			newResource = terraformutils.NewSimpleResource(
-				*vm.ID,
-				*vm.Name,
-				"azurerm_windows_virtual_machine",
-				"azurerm",
-				[]string{})
+			newResource = terraformutils.NewSimpleResource(0, *vm.ID, *vm.Name, "azurerm_windows_virtual_machine", "azurerm", []string{})
 		} else {
-			newResource = terraformutils.NewSimpleResource(
-				*vm.ID,
-				*vm.Name,
-				"azurerm_linux_virtual_machine",
-				"azurerm",
-				[]string{})
+			newResource = terraformutils.NewSimpleResource(0, *vm.ID, *vm.Name, "azurerm_linux_virtual_machine", "azurerm", []string{})
 		}
 
 		resources = append(resources, newResource)

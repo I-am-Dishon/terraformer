@@ -32,12 +32,7 @@ func (g *CloudTrailGenerator) createResources(trailList []cloudtrail.Trail) []te
 	var resources []terraformutils.Resource
 	for _, trail := range trailList {
 		resourceName := aws.StringValue(trail.Name)
-		resources = append(resources, terraformutils.NewSimpleResource(
-			resourceName,
-			resourceName,
-			"aws_cloudtrail",
-			"aws",
-			cloudtrailAllowEmptyValues))
+		resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_cloudtrail", "aws", cloudtrailAllowEmptyValues))
 	}
 	return resources
 }

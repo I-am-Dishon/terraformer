@@ -28,12 +28,7 @@ type UserGenerator struct {
 func (g UserGenerator) createResources(userList []govultr.User) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, user := range userList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			user.UserID,
-			user.UserID,
-			"vultr_user",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, user.UserID, user.UserID, "vultr_user", "vultr", []string{}))
 	}
 	return resources
 }

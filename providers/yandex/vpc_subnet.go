@@ -72,12 +72,7 @@ func (g *SubnetGenerator) InitResources() error {
 func (g *SubnetGenerator) createResources(subnets []*vpc.Subnet) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, subnet := range subnets {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			subnet.GetId(),
-			subnet.GetId(),
-			"yandex_vpc_subnet",
-			"yandex",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, subnet.GetId(), subnet.GetId(), "yandex_vpc_subnet", "yandex", []string{}))
 	}
 	return resources
 }

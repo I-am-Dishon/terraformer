@@ -28,12 +28,7 @@ type PipelineGenerator struct {
 func (g PipelineGenerator) createResources(pipelineList []heroku.Pipeline) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, pipeline := range pipelineList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			pipeline.ID,
-			pipeline.Name,
-			"heroku_pipeline",
-			"heroku",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, pipeline.ID, pipeline.Name, "heroku_pipeline", "heroku", []string{}))
 	}
 	return resources
 }

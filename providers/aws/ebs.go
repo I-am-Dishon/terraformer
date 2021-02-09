@@ -72,13 +72,7 @@ func (g *EbsGenerator) InitResources() error {
 			}
 
 			if !isRootDevice {
-				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-					aws.StringValue(volume.VolumeId),
-					aws.StringValue(volume.VolumeId),
-					"aws_ebs_volume",
-					"aws",
-					ebsAllowEmptyValues,
-				))
+				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(volume.VolumeId), aws.StringValue(volume.VolumeId), "aws_ebs_volume", "aws", ebsAllowEmptyValues, ))
 
 				for _, attachment := range volume.Attachments {
 					if attachment.State == ec2.VolumeAttachmentStateAttached {

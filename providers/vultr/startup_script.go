@@ -28,12 +28,7 @@ type StartupScriptGenerator struct {
 func (g StartupScriptGenerator) createResources(scriptList []govultr.StartupScript) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, script := range scriptList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			script.ScriptID,
-			script.ScriptID,
-			"vultr_startup_script",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, script.ScriptID, script.ScriptID, "vultr_startup_script", "vultr", []string{}))
 	}
 	return resources
 }

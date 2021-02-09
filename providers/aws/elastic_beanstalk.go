@@ -49,13 +49,7 @@ func (g *BeanstalkGenerator) addApplications(client *elasticbeanstalk.Client) er
 		return err
 	}
 	for _, application := range response.Applications {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*application.ApplicationName,
-			*application.ApplicationName,
-			"aws_elastic_beanstalk_application",
-			"aws",
-			beanstalkAllowEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *application.ApplicationName, *application.ApplicationName, "aws_elastic_beanstalk_application", "aws", beanstalkAllowEmptyValues, ))
 	}
 	return nil
 }
@@ -67,13 +61,7 @@ func (g *BeanstalkGenerator) addEnvironments(client *elasticbeanstalk.Client) er
 		return err
 	}
 	for _, environment := range response.Environments {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*environment.EnvironmentId,
-			*environment.EnvironmentName,
-			"aws_elastic_beanstalk_environment",
-			"aws",
-			beanstalkAllowEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *environment.EnvironmentId, *environment.EnvironmentName, "aws_elastic_beanstalk_environment", "aws", beanstalkAllowEmptyValues, ))
 	}
 	return nil
 }

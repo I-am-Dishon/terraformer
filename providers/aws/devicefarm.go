@@ -40,12 +40,7 @@ func (g *DeviceFarmGenerator) InitResources() error {
 		for _, project := range p.CurrentPage().Projects {
 			projectArn := aws.StringValue(project.Arn)
 			projectName := aws.StringValue(project.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				projectArn,
-				projectName,
-				"aws_devicefarm_project",
-				"aws",
-				devicefarmAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, projectArn, projectName, "aws_devicefarm_project", "aws", devicefarmAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

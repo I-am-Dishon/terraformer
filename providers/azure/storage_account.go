@@ -36,12 +36,7 @@ func (g StorageAccountGenerator) createResourcesByResourceGroup(ctx context.Cont
 	var resources []terraformutils.Resource
 	if accounts := accountListResult.Value; accounts != nil {
 		for _, account := range *accounts {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*account.ID,
-				*account.Name,
-				"azurerm_storage_account",
-				"azurerm",
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *account.ID, *account.Name, "azurerm_storage_account", "azurerm", []string{}))
 		}
 	}
 	return resources, nil
@@ -54,12 +49,7 @@ func (g StorageAccountGenerator) createResources(ctx context.Context, client sto
 	var resources []terraformutils.Resource
 	for accountListResultIterator.NotDone() {
 		account := accountListResultIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*account.ID,
-			*account.Name,
-			"azurerm_storage_account",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *account.ID, *account.Name, "azurerm_storage_account", "azurerm", []string{}))
 		if err := accountListResultIterator.Next(); err != nil {
 			log.Println(err)
 			return resources, err

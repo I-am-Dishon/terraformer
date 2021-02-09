@@ -32,12 +32,7 @@ func (g ResourceGroupGenerator) createResources(groupListResultIterator resource
 	var resources []terraformutils.Resource
 	for groupListResultIterator.NotDone() {
 		group := groupListResultIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*group.ID,
-			*group.Name,
-			"azurerm_resource_group",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *group.ID, *group.Name, "azurerm_resource_group", "azurerm", []string{}))
 		if err := groupListResultIterator.Next(); err != nil {
 			log.Println(err)
 			break
@@ -58,12 +53,7 @@ func (g *ResourceGroupGenerator) InitResources() error {
 			return err
 		}
 		g.Resources = []terraformutils.Resource{
-			terraformutils.NewSimpleResource(
-				*group.ID,
-				*group.Name,
-				"azurerm_resource_group",
-				"azurerm",
-				[]string{}),
+			terraformutils.NewSimpleResource(0, *group.ID, *group.Name, "azurerm_resource_group", "azurerm", []string{}),
 		}
 		return nil
 	}

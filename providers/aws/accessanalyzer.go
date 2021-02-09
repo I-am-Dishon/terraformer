@@ -39,12 +39,7 @@ func (g *AccessAnalyzerGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, analyzer := range p.CurrentPage().Analyzers {
 			resourceName := aws.StringValue(analyzer.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_accessanalyzer_analyzer",
-				"aws",
-				accessanalyzerAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_accessanalyzer_analyzer", "aws", accessanalyzerAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

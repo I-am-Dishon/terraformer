@@ -44,13 +44,7 @@ func (g *SyntheticsGenerator) createResources(syntheticsList []datadogV1.Synthet
 }
 
 func (g *SyntheticsGenerator) createResource(syntheticsID string) terraformutils.Resource {
-	return terraformutils.NewSimpleResource(
-		syntheticsID,
-		fmt.Sprintf("synthetics_%s", syntheticsID),
-		"datadog_synthetics_test",
-		"datadog",
-		SyntheticsAllowEmptyValues,
-	)
+	return terraformutils.NewSimpleResource(0, syntheticsID, fmt.Sprintf("synthetics_%s", syntheticsID), "datadog_synthetics_test", "datadog", SyntheticsAllowEmptyValues, )
 }
 
 // InitResources Generate TerraformResources from Datadog API,

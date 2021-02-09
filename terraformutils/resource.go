@@ -102,7 +102,7 @@ func NewResource(id, resourceName, resourceType, provider string,
 	}
 }
 
-func NewSimpleResource(id, resourceName, resourceType, provider string, allowEmptyValues []string) Resource {
+func NewSimpleResource(i int, id, resourceName, resourceType, provider string, allowEmptyValues []string) Resource {
 	return NewResource(
 		id,
 		resourceName,

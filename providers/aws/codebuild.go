@@ -30,12 +30,7 @@ type CodeBuildGenerator struct {
 func (g *CodeBuildGenerator) createResources(projectList []string) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, project := range projectList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			project,
-			project,
-			"aws_codebuild_project",
-			"aws",
-			codebuildAllowEmptyValues))
+		resources = append(resources, terraformutils.NewSimpleResource(0, project, project, "aws_codebuild_project", "aws", codebuildAllowEmptyValues))
 	}
 	return resources
 }

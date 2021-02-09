@@ -84,13 +84,7 @@ func (g *AutoScalingGenerator) loadLaunchTemplates(config aws.Config) error {
 	p := ec2.NewDescribeLaunchTemplatesPaginator(ec2svc.DescribeLaunchTemplatesRequest(&ec2.DescribeLaunchTemplatesInput{}))
 	for p.Next(context.Background()) {
 		for _, lt := range p.CurrentPage().LaunchTemplates {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(lt.LaunchTemplateId),
-				aws.StringValue(lt.LaunchTemplateName),
-				"aws_launch_template",
-				"aws",
-				AsgAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(lt.LaunchTemplateId), aws.StringValue(lt.LaunchTemplateName), "aws_launch_template", "aws", AsgAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

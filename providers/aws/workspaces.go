@@ -49,18 +49,8 @@ func (g *WorkspacesGenerator) loadWorkspaces(svc *workspaces.Client) error {
 		for _, workspace := range p.CurrentPage().Workspaces {
 			directoryID := aws.StringValue(workspace.DirectoryId)
 			workspaceID := aws.StringValue(workspace.WorkspaceId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				directoryID,
-				directoryID,
-				"aws_workspaces_directory",
-				"aws",
-				workspacesAllowEmptyValues))
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				workspaceID,
-				workspaceID,
-				"aws_workspaces_workspace",
-				"aws",
-				workspacesAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, directoryID, directoryID, "aws_workspaces_directory", "aws", workspacesAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, workspaceID, workspaceID, "aws_workspaces_workspace", "aws", workspacesAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -75,12 +65,7 @@ func (g *WorkspacesGenerator) loadWorkspacesIPGroup(svc *workspaces.Client) erro
 		}
 		for _, ipGroup := range response.Result {
 			groupID := aws.StringValue(ipGroup.GroupId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				groupID,
-				groupID,
-				"aws_workspaces_ip_group",
-				"aws",
-				workspacesAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, groupID, groupID, "aws_workspaces_ip_group", "aws", workspacesAllowEmptyValues))
 		}
 		nextToken = response.NextToken
 		if nextToken == nil {

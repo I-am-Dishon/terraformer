@@ -28,12 +28,7 @@ type BareMetalServerGenerator struct {
 func (g BareMetalServerGenerator) createResources(serverList []govultr.BareMetalServer) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, server := range serverList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			server.BareMetalServerID,
-			server.BareMetalServerID,
-			"vultr_bare_metal_server",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, server.BareMetalServerID, server.BareMetalServerID, "vultr_bare_metal_server", "vultr", []string{}))
 	}
 	return resources
 }

@@ -28,12 +28,7 @@ type AddOnAttachmentGenerator struct {
 func (g AddOnAttachmentGenerator) createResources(addOnAttachmentList []heroku.AddOnAttachment) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, addOnAttachment := range addOnAttachmentList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			addOnAttachment.ID,
-			addOnAttachment.Name,
-			"heroku_addon_attachment",
-			"heroku",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, addOnAttachment.ID, addOnAttachment.Name, "heroku_addon_attachment", "heroku", []string{}))
 	}
 	return resources
 }

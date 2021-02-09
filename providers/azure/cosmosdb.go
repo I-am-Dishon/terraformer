@@ -47,12 +47,7 @@ func (g *CosmosDBGenerator) listSQLDatabasesAndContainersBehind(resourceGroupNam
 		// The cosmosdb resource format change is NOT yet addressed in terraform provider
 		// This line is a workaround to convert to old format, and might be removed if they deprecate the old format
 		sqlDatabaseIDInOldFormat := strings.Replace(*sqlDatabase.ID, "sqlDatabases", "databases", 1)
-		resourcesDatabase = append(resourcesDatabase, terraformutils.NewSimpleResource(
-			sqlDatabaseIDInOldFormat,
-			*sqlDatabase.Name,
-			"azurerm_cosmosdb_sql_database",
-			g.ProviderName,
-			[]string{}))
+		resourcesDatabase = append(resourcesDatabase, terraformutils.NewSimpleResource(0, sqlDatabaseIDInOldFormat, *sqlDatabase.Name, "azurerm_cosmosdb_sql_database", g.ProviderName, []string{}))
 
 		sqlContainers, err := SQLResourcesClient.ListSQLContainers(ctx, resourceGroupName, accountName, *sqlDatabase.Name)
 		if err != nil {
@@ -65,12 +60,7 @@ func (g *CosmosDBGenerator) listSQLDatabasesAndContainersBehind(resourceGroupNam
 			// The cosmosdb resource format change is NOT yet addressed in terraform provider
 			// This line is a workaround to convert to old format, and might be removed if they deprecate the old format
 			sqlContainerIDInOldFormat := strings.Replace(*sqlContainer.ID, "sqlDatabases", "databases", 1)
-			resourcesContainer = append(resourcesContainer, terraformutils.NewSimpleResource(
-				sqlContainerIDInOldFormat,
-				*sqlContainer.Name,
-				"azurerm_cosmosdb_sql_container",
-				g.ProviderName,
-				[]string{}))
+			resourcesContainer = append(resourcesContainer, terraformutils.NewSimpleResource(0, sqlContainerIDInOldFormat, *sqlContainer.Name, "azurerm_cosmosdb_sql_container", g.ProviderName, []string{}))
 		}
 	}
 
@@ -93,12 +83,7 @@ func (g *CosmosDBGenerator) listTables(resourceGroupName string, accountName str
 		return nil, err
 	}
 	for _, table := range *tables.Value {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*table.ID,
-			*table.Name,
-			"azurerm_cosmosdb_table",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *table.ID, *table.Name, "azurerm_cosmosdb_table", g.ProviderName, []string{}))
 	}
 
 	return resources, nil
@@ -128,12 +113,7 @@ func (g *CosmosDBGenerator) listAndAddForDatabaseAccounts() ([]terraformutils.Re
 		return nil, err
 	}
 	for _, account := range *accounts.Value {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*account.ID,
-			*account.Name,
-			"azurerm_cosmosdb_account",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *account.ID, *account.Name, "azurerm_cosmosdb_account", g.ProviderName, []string{}))
 
 		id, err := ParseAzureResourceID(*account.ID)
 		if err != nil {

@@ -15,28 +15,33 @@
 package gitlab
 
 import (
-	"log"
-	
 	"github.com/GoogleCloudPlatform/terraformer/terraformutils"
-	gitlab "github.com/xanzy/go-gitlab"
-	
+	"github.com/xanzy/go-gitlab"
+	"log"
 )
 
 type UserGenerator struct {
 	GitlabService
 }
 
+var (
+	// UserAllowEmptyValues ...
+	UserAllowEmptyValues = []string{}
+)
 
 func (u UserGenerator) createResources(userList []*gitlab.User) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, user := range userList {
+		log.Println("Userid", user.ID, "---N", user.Name,"---u", user.Username,"---A", "---S", user.State,
+			user.AvatarURL,"---WE", user.WebURL)
+
 		resources = append(resources, terraformutils.NewSimpleResource(
+			0,
+			string(user),
 			user.Username,
-			user.Username,
-			user.Name,
-			user.State,
-			[]string{},
-			// "gitlab_user",
+			"gitlab_user",
+			"gitlab",
+			UserAllowEmptyValues,
 		))
 			
 	}
@@ -50,10 +55,15 @@ func (u *UserGenerator) InitResources() error {
 	log.Fatalf("Failed to create client: %v", err)
 	}
 	opt := &gitlab.ListUsersOptions{
-		ListOptions: gitlab.ListOptions{PerPage: 100},
+		ListOptions: gitlab.ListOptions{PerPage: 5},
 	}
 	//users, _, err := git.Users.ListUsers(&gitlab.ListUsersOptions{})
 	users, _, err := git.Users.ListUsers(opt)
+	//err = json.Unmarshal(users, *gitlab.User)
+	//if err != nil {
+	//	return err
+	//}
 	u.Resources = u.createResources(users)
 	return nil	
 }
+

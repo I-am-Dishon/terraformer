@@ -38,12 +38,7 @@ func (g *DatabaseClusterGenerator) loadDatabaseClusters(ctx context.Context, cli
 		}
 
 		for _, cluster := range clusters {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				cluster.ID,
-				cluster.Name,
-				"digitalocean_database_cluster",
-				"digitalocean",
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, cluster.ID, cluster.Name, "digitalocean_database_cluster", "digitalocean", []string{}))
 			list = append(list, cluster)
 		}
 
@@ -74,12 +69,7 @@ func (g *DatabaseClusterGenerator) loadDatabaseConnectionPools(ctx context.Conte
 		}
 
 		for _, pool := range pools {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				fmt.Sprintf("%s/%s", clusterID, pool.Name),
-				pool.Name,
-				"digitalocean_database_connection_pool",
-				"digitalocean",
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", clusterID, pool.Name), pool.Name, "digitalocean_database_connection_pool", "digitalocean", []string{}))
 		}
 
 		// if we are at the last page, break out the for loop

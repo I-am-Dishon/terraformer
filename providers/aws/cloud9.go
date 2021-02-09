@@ -45,12 +45,7 @@ func (g *Cloud9Generator) InitResources() error {
 			details.Status == cloud9.EnvironmentStatusDeleting {
 			continue
 		}
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			environmentID,
-			environmentID,
-			"aws_cloud9_environment_ec2",
-			"aws",
-			cloud9AllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, environmentID, environmentID, "aws_cloud9_environment_ec2", "aws", cloud9AllowEmptyValues))
 	}
 	return nil
 }

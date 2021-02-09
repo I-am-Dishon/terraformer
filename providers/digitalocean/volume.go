@@ -58,12 +58,7 @@ func (g VolumeGenerator) listVolumes(ctx context.Context, client *godo.Client) (
 func (g VolumeGenerator) createResources(volumeList []godo.Volume) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, volume := range volumeList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			volume.ID,
-			volume.Name,
-			"digitalocean_volume",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, volume.ID, volume.Name, "digitalocean_volume", "digitalocean", []string{}))
 	}
 	return resources
 }

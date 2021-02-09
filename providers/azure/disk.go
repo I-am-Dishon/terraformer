@@ -32,12 +32,7 @@ func (g DiskGenerator) createResources(diskListIterator compute.DiskListIterator
 	var resources []terraformutils.Resource
 	for diskListIterator.NotDone() {
 		disk := diskListIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*disk.ID,
-			*disk.Name,
-			"azurerm_managed_disk",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *disk.Name, "azurerm_managed_disk", "azurerm", []string{}))
 		if err := diskListIterator.Next(); err != nil {
 			log.Println(err)
 			return resources, err

@@ -32,12 +32,7 @@ type DatabaseMongoGenerator struct {
 // loadMongoDB ...
 func (g DatabaseMongoGenerator) loadMongoDB(dbID string, dbName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		dbID,
-		dbName,
-		"ibm_database",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, dbID, dbName, "ibm_database", "ibm", []string{})
 	return resources
 }
 

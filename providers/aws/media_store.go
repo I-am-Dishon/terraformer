@@ -39,12 +39,7 @@ func (g *MediaStoreGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, container := range p.CurrentPage().Containers {
 			containerName := aws.StringValue(container.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				containerName,
-				containerName,
-				"aws_media_store_container",
-				"aws",
-				mediastoreAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, containerName, containerName, "aws_media_store_container", "aws", mediastoreAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

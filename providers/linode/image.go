@@ -28,12 +28,7 @@ type ImageGenerator struct {
 func (g ImageGenerator) createResources(imageList []linodego.Image) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, image := range imageList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			image.ID,
-			image.ID,
-			"linode_image",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, image.ID, image.ID, "linode_image", "linode", []string{}))
 	}
 	return resources
 }

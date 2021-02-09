@@ -229,6 +229,7 @@ Links to download Terraform Providers:
     * Cloudflare provider >1.16 - [here](https://releases.hashicorp.com/terraform-provider-cloudflare/)
 * VCS
     * GitHub provider >=2.2.1 - [here](https://releases.hashicorp.com/terraform-provider-github/)
+    * Gitlab provider >=3.3.0 - [here](https://releases.hashicorp.com/terraform-provider-gitlab/)
 * Monitoring & System Management
     * Datadog provider >2.1.0 - [here](https://releases.hashicorp.com/terraform-provider-datadog/)
     * New Relic provider >1.5.0 - [here](https://releases.hashicorp.com/terraform-provider-newrelic/)

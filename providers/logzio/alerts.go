@@ -37,13 +37,7 @@ func (g *AlertsGenerator) InitResources() error {
 	}
 	allowedEmptyValues := []string{"alert_notification_endpoints.#", "notification_emails.#"}
 	for _, alert := range alerts {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			strconv.FormatInt(alert.AlertId, 10),
-			createSlug(alert.Title+"-"+strconv.FormatInt(alert.AlertId, 10)),
-			"logzio_alert",
-			"logzio",
-			allowedEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, strconv.FormatInt(alert.AlertId, 10), createSlug(alert.Title+"-"+strconv.FormatInt(alert.AlertId, 10)), "logzio_alert", "logzio", allowedEmptyValues, ))
 	}
 	return nil
 }

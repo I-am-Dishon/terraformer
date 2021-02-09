@@ -58,12 +58,7 @@ func (g FloatingIPGenerator) listFloatingIPs(ctx context.Context, client *godo.C
 func (g FloatingIPGenerator) createResources(floatingIPList []godo.FloatingIP) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, floatingIP := range floatingIPList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			floatingIP.IP,
-			floatingIP.IP,
-			"digitalocean_floating_ip",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, floatingIP.IP, floatingIP.IP, "digitalocean_floating_ip", "digitalocean", []string{}))
 	}
 	return resources
 }

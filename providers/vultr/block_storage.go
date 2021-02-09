@@ -28,12 +28,7 @@ type BlockStorageGenerator struct {
 func (g BlockStorageGenerator) createResources(blockStorageList []govultr.BlockStorage) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, blockStorage := range blockStorageList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			blockStorage.BlockStorageID,
-			blockStorage.BlockStorageID,
-			"vultr_block_storage",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, 0, blockStorage.BlockStorageID, blockStorage.BlockStorageID, "vultr_block_storage", "vultr"))
 	}
 	return resources
 }

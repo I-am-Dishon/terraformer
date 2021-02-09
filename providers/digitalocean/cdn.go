@@ -58,12 +58,7 @@ func (g CDNGenerator) listCDNs(ctx context.Context, client *godo.Client) ([]godo
 func (g CDNGenerator) createResources(cdnList []godo.CDN) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, cdn := range cdnList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			cdn.ID,
-			cdn.ID,
-			"digitalocean_cdn",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, cdn.ID, cdn.ID, "digitalocean_cdn", "digitalocean", []string{}))
 	}
 	return resources
 }

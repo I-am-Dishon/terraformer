@@ -42,13 +42,7 @@ func (g *ElbGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, loadBalancer := range p.CurrentPage().LoadBalancerDescriptions {
 			resourceName := aws.StringValue(loadBalancer.LoadBalancerName)
-			resource := terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_elb",
-				"aws",
-				ElbAllowEmptyValues,
-			)
+			resource := terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_elb", "aws", )
 			resource.IgnoreKeys = append(resource.IgnoreKeys, "^instances\\.(.*)") // don't import current connect instances to ELB
 			g.Resources = append(g.Resources, resource)
 		}

@@ -28,12 +28,7 @@ type SnapshotGenerator struct {
 func (g SnapshotGenerator) createResources(snapshotList []govultr.Snapshot) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, snapshot := range snapshotList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			snapshot.SnapshotID,
-			snapshot.SnapshotID,
-			"vultr_snapshot",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, snapshot.SnapshotID, snapshot.SnapshotID, "vultr_snapshot", "vultr", []string{}))
 	}
 	return resources
 }

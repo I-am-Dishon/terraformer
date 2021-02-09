@@ -36,13 +36,7 @@ func (g *AlertNotificationEndpointsGenerator) InitResources() error {
 		return err
 	}
 	for _, endpoint := range endpoints {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			strconv.FormatInt(endpoint.Id, 10),
-			createSlug(endpoint.Title+"-"+string(endpoint.EndpointType)+"-"+strconv.FormatInt(endpoint.Id, 10)),
-			"logzio_endpoint",
-			"logzio",
-			[]string{},
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, strconv.FormatInt(endpoint.Id, 10), createSlug(endpoint.Title+"-"+string(endpoint.EndpointType)+"-"+strconv.FormatInt(endpoint.Id, 10)), "logzio_endpoint", "logzio", []string{}, ))
 	}
 	return nil
 }

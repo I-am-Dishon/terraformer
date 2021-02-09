@@ -91,13 +91,7 @@ func (g *LambdaGenerator) addFunctions(svc *lambda.Client) error {
 				}))
 			for pi.Next(context.Background()) {
 				for _, functionEventInvokeConfig := range pi.CurrentPage().FunctionEventInvokeConfigs {
-					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-						*function.FunctionArn,
-						"feic_"+*functionEventInvokeConfig.FunctionArn,
-						"aws_lambda_function_event_invoke_config",
-						"aws",
-						lambdaAllowEmptyValues,
-					))
+					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *function.FunctionArn, "feic_"+*functionEventInvokeConfig.FunctionArn, "aws_lambda_function_event_invoke_config", "aws", lambdaAllowEmptyValues, ))
 				}
 			}
 			if err := pi.Err(); err != nil {
@@ -138,13 +132,7 @@ func (g *LambdaGenerator) addLayerVersions(svc *lambda.Client) error {
 			}))
 			for pv.Next(context.Background()) {
 				for _, layerVersion := range pv.CurrentPage().LayerVersions {
-					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-						*layerVersion.LayerVersionArn,
-						*layerVersion.LayerVersionArn,
-						"aws_lambda_layer_version",
-						"aws",
-						lambdaAllowEmptyValues,
-					))
+					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *layerVersion.LayerVersionArn, *layerVersion.LayerVersionArn, "aws_lambda_layer_version", "aws", lambdaAllowEmptyValues, ))
 				}
 			}
 			if err := pv.Err(); err != nil {

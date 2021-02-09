@@ -23,13 +23,7 @@ func (g *SfnGenerator) InitResources() error {
 	p := sfn.NewListStateMachinesPaginator(svc.ListStateMachinesRequest(&sfn.ListStateMachinesInput{}))
 	for p.Next(context.Background()) {
 		for _, stateMachine := range p.CurrentPage().StateMachines {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*stateMachine.StateMachineArn,
-				*stateMachine.Name,
-				"aws_sfn_state_machine",
-				"aws",
-				sfnAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *stateMachine.StateMachineArn, *stateMachine.Name, "aws_sfn_state_machine", "aws", sfnAllowEmptyValues, ))
 
 			if err := p.Err(); err != nil {
 				return err
@@ -40,13 +34,7 @@ func (g *SfnGenerator) InitResources() error {
 	pActivity := sfn.NewListActivitiesPaginator(svc.ListActivitiesRequest(&sfn.ListActivitiesInput{}))
 	for pActivity.Next(context.Background()) {
 		for _, stateMachine := range pActivity.CurrentPage().Activities {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*stateMachine.ActivityArn,
-				*stateMachine.Name,
-				"aws_sfn_activity",
-				"aws",
-				sfnAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *stateMachine.ActivityArn, *stateMachine.Name, "aws_sfn_activity", "aws", sfnAllowEmptyValues, ))
 
 			if err := pActivity.Err(); err != nil {
 				return err

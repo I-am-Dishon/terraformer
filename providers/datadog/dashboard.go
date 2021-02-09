@@ -44,13 +44,7 @@ func (g *DashboardGenerator) createResources(dashboards []datadogV1.DashboardSum
 }
 
 func (g *DashboardGenerator) createResource(dashboardID string) terraformutils.Resource {
-	return terraformutils.NewSimpleResource(
-		dashboardID,
-		fmt.Sprintf("dashboard_%s", dashboardID),
-		"datadog_dashboard",
-		"datadog",
-		DashboardAllowEmptyValues,
-	)
+	return terraformutils.NewSimpleResource(0, dashboardID, fmt.Sprintf("dashboard_%s", dashboardID), "datadog_dashboard", "datadog", DashboardAllowEmptyValues, )
 }
 
 // InitResources Generate TerraformResources from Datadog API,

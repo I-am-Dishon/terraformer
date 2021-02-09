@@ -48,13 +48,7 @@ func (g *MonitorGenerator) createResources(monitors []datadogV1.Monitor) []terra
 }
 
 func (g *MonitorGenerator) createResource(monitorID string) terraformutils.Resource {
-	return terraformutils.NewSimpleResource(
-		monitorID,
-		fmt.Sprintf("monitor_%s", monitorID),
-		"datadog_monitor",
-		"datadog",
-		MonitorAllowEmptyValues,
-	)
+	return terraformutils.NewSimpleResource(0, monitorID, fmt.Sprintf("monitor_%s", monitorID), "datadog_monitor", "datadog", MonitorAllowEmptyValues, )
 }
 
 // InitResources Generate TerraformResources from Datadog API,

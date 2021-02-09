@@ -40,13 +40,7 @@ func (g *ElasticIPGenerator) createElasticIpsResources(svc *ec2.Client) []terraf
 	}
 
 	for _, eip := range addresses.Addresses {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(eip.AllocationId),
-			aws.StringValue(eip.AllocationId),
-			"aws_eip",
-			"aws",
-			eipAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(eip.AllocationId), aws.StringValue(eip.AllocationId), "aws_eip", "aws", eipAllowEmptyValues, ))
 	}
 
 	return resources

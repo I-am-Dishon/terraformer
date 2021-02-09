@@ -29,12 +29,7 @@ type TokenGenerator struct {
 func (g TokenGenerator) createResources(tokenList []linodego.Token) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, token := range tokenList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(token.ID),
-			strconv.Itoa(token.ID),
-			"linode_token",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(token.ID), strconv.Itoa(token.ID), "linode_token", "linode", []string{}))
 	}
 	return resources
 }

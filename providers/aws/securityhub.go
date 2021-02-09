@@ -65,13 +65,7 @@ func (g *SecurityhubGenerator) addAccount(client *securityhub.Client, accountNum
 		}
 		return true, nil
 	}
-	g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-		accountNumber,
-		accountNumber,
-		"aws_securityhub_account",
-		"aws",
-		securityhubAllowEmptyValues,
-	))
+	g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, accountNumber, accountNumber, "aws_securityhub_account", "aws", securityhubAllowEmptyValues, ))
 	return false, nil
 }
 

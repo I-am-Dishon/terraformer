@@ -35,12 +35,7 @@ func (g AppFeatureGenerator) createResources(svc *heroku.Service, appList []hero
 			log.Println(err)
 		}
 		for _, appFeature := range output {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				fmt.Sprintf("%s:%s", app.Name, appFeature.ID),
-				appFeature.Name,
-				"heroku_app_feature",
-				"heroku",
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", app.Name, appFeature.ID), appFeature.Name, "heroku_app_feature", "heroku", []string{}))
 		}
 	}
 	return resources

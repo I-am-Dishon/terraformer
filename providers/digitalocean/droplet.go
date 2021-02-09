@@ -59,12 +59,7 @@ func (g DropletGenerator) listDroplets(ctx context.Context, client *godo.Client)
 func (g DropletGenerator) createResources(dropletList []godo.Droplet) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, droplet := range dropletList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(droplet.ID),
-			droplet.Name,
-			"digitalocean_droplet",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(droplet.ID), droplet.Name, "digitalocean_droplet", "digitalocean", []string{}))
 	}
 	return resources
 }

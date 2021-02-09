@@ -80,12 +80,7 @@ func (g *WafGenerator) loadWebACL(svc *waf.Client) error {
 		return err
 	}
 	for _, acl := range output.WebACLs {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*acl.WebACLId,
-			*acl.Name+"_"+(*acl.WebACLId)[0:8],
-			"aws_waf_web_acl",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *acl.WebACLId, *acl.Name+"_"+(*acl.WebACLId)[0:8], "aws_waf_web_acl", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -96,12 +91,7 @@ func (g *WafGenerator) loadByteMatchSet(svc *waf.Client) error {
 		return err
 	}
 	for _, byteMatchSet := range output.ByteMatchSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*byteMatchSet.ByteMatchSetId,
-			*byteMatchSet.Name+"_"+(*byteMatchSet.ByteMatchSetId)[0:8],
-			"aws_waf_byte_match_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *byteMatchSet.ByteMatchSetId, *byteMatchSet.Name+"_"+(*byteMatchSet.ByteMatchSetId)[0:8], "aws_waf_byte_match_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -112,12 +102,7 @@ func (g *WafGenerator) loadGeoMatchSet(svc *waf.Client) error {
 		return err
 	}
 	for _, matchSet := range output.GeoMatchSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*matchSet.GeoMatchSetId,
-			*matchSet.Name+"_"+(*matchSet.GeoMatchSetId)[0:8],
-			"aws_waf_geo_match_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *matchSet.GeoMatchSetId, *matchSet.Name+"_"+(*matchSet.GeoMatchSetId)[0:8], "aws_waf_geo_match_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -128,12 +113,7 @@ func (g *WafGenerator) loadIPSet(svc *waf.Client) error {
 		return err
 	}
 	for _, IPSet := range output.IPSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*IPSet.IPSetId,
-			*IPSet.Name+"_"+(*IPSet.IPSetId)[0:8],
-			"aws_waf_ipset",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *IPSet.IPSetId, *IPSet.Name+"_"+(*IPSet.IPSetId)[0:8], "aws_waf_ipset", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -144,12 +124,7 @@ func (g *WafGenerator) loadRateBasedRules(svc *waf.Client) error {
 		return err
 	}
 	for _, rule := range output.Rules {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*rule.RuleId,
-			*rule.Name+"_"+(*rule.RuleId)[0:8],
-			"aws_waf_rate_based_rule",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *rule.RuleId, *rule.Name+"_"+(*rule.RuleId)[0:8], "aws_waf_rate_based_rule", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -160,12 +135,7 @@ func (g *WafGenerator) loadRegexMatchSets(svc *waf.Client) error {
 		return err
 	}
 	for _, regexMatchSet := range output.RegexMatchSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*regexMatchSet.RegexMatchSetId,
-			*regexMatchSet.Name+"_"+(*regexMatchSet.RegexMatchSetId)[0:8],
-			"aws_waf_regex_match_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *regexMatchSet.RegexMatchSetId, *regexMatchSet.Name+"_"+(*regexMatchSet.RegexMatchSetId)[0:8], "aws_waf_regex_match_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -176,12 +146,7 @@ func (g *WafGenerator) loadRegexPatternSets(svc *waf.Client) error {
 		return err
 	}
 	for _, regexPatternSet := range output.RegexPatternSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*regexPatternSet.RegexPatternSetId,
-			*regexPatternSet.Name+"_"+(*regexPatternSet.RegexPatternSetId)[0:8],
-			"aws_waf_regex_pattern_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *regexPatternSet.RegexPatternSetId, *regexPatternSet.Name+"_"+(*regexPatternSet.RegexPatternSetId)[0:8], "aws_waf_regex_pattern_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -192,12 +157,7 @@ func (g *WafGenerator) loadWafRules(svc *waf.Client) error {
 		return err
 	}
 	for _, rule := range output.Rules {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*rule.RuleId,
-			*rule.Name+"_"+(*rule.RuleId)[0:8],
-			"aws_waf_rule",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *rule.RuleId, *rule.Name+"_"+(*rule.RuleId)[0:8], "aws_waf_rule", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -208,12 +168,7 @@ func (g *WafGenerator) loadWafRuleGroups(svc *waf.Client) error {
 		return err
 	}
 	for _, ruleGroup := range output.RuleGroups {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*ruleGroup.RuleGroupId,
-			*ruleGroup.Name+"_"+(*ruleGroup.RuleGroupId)[0:8],
-			"aws_waf_rule_group",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *ruleGroup.RuleGroupId, *ruleGroup.Name+"_"+(*ruleGroup.RuleGroupId)[0:8], "aws_waf_rule_group", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -224,12 +179,7 @@ func (g *WafGenerator) loadSizeConstraintSets(svc *waf.Client) error {
 		return err
 	}
 	for _, sizeConstraintSet := range output.SizeConstraintSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*sizeConstraintSet.SizeConstraintSetId,
-			*sizeConstraintSet.Name+"_"+(*sizeConstraintSet.SizeConstraintSetId)[0:8],
-			"aws_waf_size_constraint_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *sizeConstraintSet.SizeConstraintSetId, *sizeConstraintSet.Name+"_"+(*sizeConstraintSet.SizeConstraintSetId)[0:8], "aws_waf_size_constraint_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -240,12 +190,7 @@ func (g *WafGenerator) loadSQLInjectionMatchSets(svc *waf.Client) error {
 		return err
 	}
 	for _, sqlInjectionMatchSet := range output.SqlInjectionMatchSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*sqlInjectionMatchSet.SqlInjectionMatchSetId,
-			*sqlInjectionMatchSet.Name+"_"+(*sqlInjectionMatchSet.SqlInjectionMatchSetId)[0:8],
-			"aws_waf_sql_injection_match_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *sqlInjectionMatchSet.SqlInjectionMatchSetId, *sqlInjectionMatchSet.Name+"_"+(*sqlInjectionMatchSet.SqlInjectionMatchSetId)[0:8], "aws_waf_sql_injection_match_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }
@@ -256,12 +201,7 @@ func (g *WafGenerator) loadXSSMatchSet(svc *waf.Client) error {
 		return err
 	}
 	for _, xssMatchSet := range output.XssMatchSets {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*xssMatchSet.XssMatchSetId,
-			*xssMatchSet.Name+"_"+(*xssMatchSet.XssMatchSetId)[0:8],
-			"aws_waf_xss_match_set",
-			"aws",
-			wafAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *xssMatchSet.XssMatchSetId, *xssMatchSet.Name+"_"+(*xssMatchSet.XssMatchSetId)[0:8], "aws_waf_xss_match_set", "aws", wafAllowEmptyValues))
 	}
 	return nil
 }

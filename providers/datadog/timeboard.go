@@ -37,13 +37,7 @@ func (TimeboardGenerator) createResources(timeboards []datadog.DashboardLite) []
 	resources := []terraformutils.Resource{}
 	for _, timeboard := range timeboards {
 		resourceName := strconv.Itoa(timeboard.GetId())
-		resources = append(resources, terraformutils.NewSimpleResource(
-			resourceName,
-			fmt.Sprintf("timeboard_%s", resourceName),
-			"datadog_timeboard",
-			"datadog",
-			TimeboardAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, fmt.Sprintf("timeboard_%s", resourceName), "datadog_timeboard", "datadog", TimeboardAllowEmptyValues, ))
 	}
 
 	return resources

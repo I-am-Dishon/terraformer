@@ -29,12 +29,7 @@ func (g *ServiceV1Generator) loadServices(client *fastly.Client) ([]*fastly.Serv
 		return nil, err
 	}
 	for _, service := range services {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			service.ID,
-			service.ID,
-			"fastly_service_v1",
-			"fastly",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, service.ID, service.ID, "fastly_service_v1", "fastly", []string{}))
 	}
 	return services, nil
 }

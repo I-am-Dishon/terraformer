@@ -36,13 +36,7 @@ func (g *ElastiCacheGenerator) loadCacheClusters(svc *elasticache.Client) error 
 	for p.Next(context.Background()) {
 		for _, cluster := range p.CurrentPage().CacheClusters {
 			resourceName := aws.StringValue(cluster.CacheClusterId)
-			resource := terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_elasticache_cluster",
-				"aws",
-				elastiCacheAllowEmptyValues,
-			)
+			resource := terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_elasticache_cluster", "aws", elastiCacheAllowEmptyValues, )
 			// redis only - if cluster has Replication Group not need next attributes.
 			// terraform-aws provider has ConflictsWith on ReplicationGroupId with all next attributes,
 			// but return all attributes on refresh :(
@@ -82,13 +76,7 @@ func (g *ElastiCacheGenerator) loadParameterGroups(svc *elasticache.Client) erro
 			if strings.Contains(resourceName, ".") {
 				continue // skip default Default ParameterGroups like default.redis5.0
 			}
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_elasticache_parameter_group",
-				"aws",
-				elastiCacheAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_elasticache_parameter_group", "aws", elastiCacheAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -99,13 +87,7 @@ func (g *ElastiCacheGenerator) loadSubnetGroups(svc *elasticache.Client) error {
 	for p.Next(context.Background()) {
 		for _, subnet := range p.CurrentPage().CacheSubnetGroups {
 			resourceName := aws.StringValue(subnet.CacheSubnetGroupName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_elasticache_subnet_group",
-				"aws",
-				elastiCacheAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_elasticache_subnet_group", "aws", elastiCacheAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -116,13 +98,7 @@ func (g *ElastiCacheGenerator) loadReplicationGroups(svc *elasticache.Client) er
 	for p.Next(context.Background()) {
 		for _, replicationGroup := range p.CurrentPage().ReplicationGroups {
 			resourceName := aws.StringValue(replicationGroup.ReplicationGroupId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_elasticache_replication_group",
-				"aws",
-				elastiCacheAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_elasticache_replication_group", "aws", elastiCacheAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

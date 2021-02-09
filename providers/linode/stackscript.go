@@ -31,12 +31,7 @@ func (g StackScriptGenerator) createResources(stackscriptList []linodego.Stacksc
 	for _, stackscript := range stackscriptList {
 		// Avoid importing all community stackscripts
 		if !stackscript.IsPublic {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				strconv.Itoa(stackscript.ID),
-				strconv.Itoa(stackscript.ID),
-				"linode_stackscript",
-				"linode",
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(stackscript.ID), strconv.Itoa(stackscript.ID), "linode_stackscript", "linode", []string{}))
 		}
 	}
 	return resources

@@ -32,12 +32,7 @@ func (g *DomainGenerator) loadDomains(client linodego.Client) ([]linodego.Domain
 		return nil, err
 	}
 	for _, domain := range domainList {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(domain.ID),
-			strconv.Itoa(domain.ID),
-			"linode_domain",
-			"linode",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, strconv.Itoa(domain.ID), strconv.Itoa(domain.ID), "linode_domain", "linode", []string{}))
 	}
 	return domainList, nil
 }

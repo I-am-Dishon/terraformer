@@ -45,13 +45,7 @@ func (g *DowntimeGenerator) createResources(downtimes []datadogV1.Downtime) []te
 }
 
 func (g *DowntimeGenerator) createResource(downtimeID string) terraformutils.Resource {
-	return terraformutils.NewSimpleResource(
-		downtimeID,
-		fmt.Sprintf("downtime_%s", downtimeID),
-		"datadog_downtime",
-		"datadog",
-		DowntimeAllowEmptyValues,
-	)
+	return terraformutils.NewSimpleResource(0, downtimeID, fmt.Sprintf("downtime_%s", downtimeID), "datadog_downtime", "datadog", DowntimeAllowEmptyValues, )
 }
 
 // InitResources Generate TerraformResources from Datadog API,

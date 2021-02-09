@@ -56,13 +56,7 @@ func (g *ConfigGenerator) addConfigurationRecorders(svc *configservice.Client) (
 	var configurationRecorderRefs []string
 	for _, configurationRecorder := range configurationRecorders.ConfigurationRecorders {
 		name := *configurationRecorder.Name
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			name,
-			name,
-			"aws_config_configuration_recorder",
-			"aws",
-			configAllowEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, name, name, "aws_config_configuration_recorder", "aws", configAllowEmptyValues, ))
 		configurationRecorderRefs = append(configurationRecorderRefs,
 			"aws_config_configuration_recorder.tfer--"+name)
 	}

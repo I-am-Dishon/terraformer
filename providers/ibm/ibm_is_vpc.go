@@ -29,34 +29,19 @@ type VPCGenerator struct {
 
 func (g VPCGenerator) createVPCResources(vpcID, vpcName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		vpcID,
-		vpcName,
-		"ibm_is_vpc",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, vpcID, vpcName, "ibm_is_vpc", "ibm", []string{})
 	return resources
 }
 
 func (g VPCGenerator) createVPCAddressPrefixResources(vpcID, addPrefixID, addPrefixName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", vpcID, addPrefixID),
-		addPrefixName,
-		"ibm_is_vpc_address_prefix",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", vpcID, addPrefixID), addPrefixName, "ibm_is_vpc_address_prefix", "ibm", []string{})
 	return resources
 }
 
 func (g VPCGenerator) createVPCRouteResources(vpcID, routeID, routeName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", vpcID, routeID),
-		routeName,
-		"ibm_is_vpc_route",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", vpcID, routeID), routeName, "ibm_is_vpc_route", "ibm", []string{})
 	return resources
 }
 

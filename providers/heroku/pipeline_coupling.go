@@ -28,12 +28,7 @@ type PipelineCouplingGenerator struct {
 func (g PipelineCouplingGenerator) createResources(pipelineCouplingList []heroku.PipelineCoupling) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, pipelineCoupling := range pipelineCouplingList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			pipelineCoupling.ID,
-			pipelineCoupling.ID,
-			"heroku_pipeline_coupling",
-			"heroku",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, pipelineCoupling.ID, pipelineCoupling.ID, "heroku_pipeline_coupling", "heroku", []string{}))
 	}
 	return resources
 }

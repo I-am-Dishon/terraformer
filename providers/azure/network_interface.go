@@ -32,12 +32,7 @@ func (g NetworkInterfaceGenerator) createResources(interfaceListResult network.I
 	var resources []terraformutils.Resource
 	for interfaceListResult.NotDone() {
 		networkInterface := interfaceListResult.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*networkInterface.ID,
-			*networkInterface.Name,
-			"azurerm_network_interface",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *networkInterface.ID, *networkInterface.Name, "azurerm_network_interface", "azurerm", []string{}))
 		if err := interfaceListResult.Next(); err != nil {
 			log.Println(err)
 			return resources, err

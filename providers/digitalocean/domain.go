@@ -38,12 +38,7 @@ func (g *DomainGenerator) loadDomains(ctx context.Context, client *godo.Client) 
 		}
 
 		for _, domain := range domains {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				domain.Name,
-				domain.Name,
-				"digitalocean_domain",
-				"digitalocean",
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, domain.Name, domain.Name, "digitalocean_domain", "digitalocean", []string{}))
 			list = append(list, domain)
 		}
 

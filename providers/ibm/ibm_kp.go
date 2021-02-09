@@ -33,23 +33,13 @@ type KPGenerator struct {
 
 func (g KPGenerator) loadKP(kpID, kpName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		kpID,
-		kpID,
-		"ibm_resource_instance",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, kpID, kpID, "ibm_resource_instance", "ibm", []string{})
 	return resources
 }
 
 func (g KPGenerator) loadkPKeys(kpKeyCRN, kpKeyID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		kpKeyCRN,
-		kpKeyID,
-		"ibm_kms_key",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, kpKeyCRN, kpKeyID, "ibm_kms_key", "ibm", []string{})
 	return resources
 }
 

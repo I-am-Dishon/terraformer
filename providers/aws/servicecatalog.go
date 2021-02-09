@@ -40,12 +40,7 @@ func (g *ServiceCatalogGenerator) InitResources() error {
 		for _, portfolio := range p.CurrentPage().PortfolioDetails {
 			portfolioID := aws.StringValue(portfolio.Id)
 			portfolioName := aws.StringValue(portfolio.DisplayName)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				portfolioID,
-				portfolioName,
-				"aws_servicecatalog_portfolio",
-				"aws",
-				servicecatalogAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, portfolioID, portfolioName, "aws_servicecatalog_portfolio", "aws", servicecatalogAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

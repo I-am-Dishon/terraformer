@@ -29,12 +29,7 @@ type SSHKeyGenerator struct {
 func (g SSHKeyGenerator) createResources(keyList []linodego.SSHKey) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, key := range keyList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(key.ID),
-			strconv.Itoa(key.ID),
-			"linode_sshkey",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(key.ID), strconv.Itoa(key.ID), "linode_sshkey", "linode", []string{}))
 	}
 	return resources
 }

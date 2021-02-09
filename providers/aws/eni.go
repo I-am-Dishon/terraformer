@@ -32,13 +32,7 @@ type EniGenerator struct {
 func (EniGenerator) createResources(enis *ec2.DescribeNetworkInterfacesOutput) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, eni := range enis.NetworkInterfaces {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(eni.NetworkInterfaceId),
-			aws.StringValue(eni.NetworkInterfaceId),
-			"aws_network_interface",
-			"aws",
-			EniAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(eni.NetworkInterfaceId), aws.StringValue(eni.NetworkInterfaceId), "aws_network_interface", "aws", EniAllowEmptyValues, ))
 	}
 	return resources
 }

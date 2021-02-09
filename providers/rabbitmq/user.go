@@ -35,13 +35,7 @@ var UserAllowEmptyValues = []string{}
 func (g UserGenerator) createResources(users Users) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, user := range users {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			user.Name,
-			"user_"+normalizeResourceName(user.Name),
-			"rabbitmq_user",
-			"rabbitmq",
-			UserAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, user.Name, "user_"+normalizeResourceName(user.Name), "rabbitmq_user", "rabbitmq", UserAllowEmptyValues, ))
 	}
 	return resources
 }

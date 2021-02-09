@@ -36,13 +36,7 @@ func (g *RDSGenerator) loadDBInstances(svc *rds.Client) error {
 	for p.Next(context.Background()) {
 		for _, db := range p.CurrentPage().DBInstances {
 			resourceName := aws.StringValue(db.DBInstanceIdentifier)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_db_instance",
-				"aws",
-				RDSAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_db_instance", "aws", RDSAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -56,13 +50,7 @@ func (g *RDSGenerator) loadDBParameterGroups(svc *rds.Client) error {
 			if strings.Contains(resourceName, ".") {
 				continue // skip default Default ParameterGroups like default.mysql5.6
 			}
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_db_parameter_group",
-				"aws",
-				RDSAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_db_parameter_group", "aws", RDSAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -73,13 +61,7 @@ func (g *RDSGenerator) loadDBSubnetGroups(svc *rds.Client) error {
 	for p.Next(context.Background()) {
 		for _, subnet := range p.CurrentPage().DBSubnetGroups {
 			resourceName := aws.StringValue(subnet.DBSubnetGroupName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_db_subnet_group",
-				"aws",
-				RDSAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_db_subnet_group", "aws", RDSAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -93,13 +75,7 @@ func (g *RDSGenerator) loadOptionGroups(svc *rds.Client) error {
 			if strings.Contains(resourceName, ".") || strings.Contains(resourceName, ":") {
 				continue // skip default Default OptionGroups like default.mysql5.6
 			}
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_db_option_group",
-				"aws",
-				RDSAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_db_option_group", "aws", RDSAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -110,13 +86,7 @@ func (g *RDSGenerator) loadEventSubscription(svc *rds.Client) error {
 	for p.Next(context.Background()) {
 		for _, eventSubscription := range p.CurrentPage().EventSubscriptionsList {
 			resourceName := aws.StringValue(eventSubscription.CustomerAwsId)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_db_event_subscription",
-				"aws",
-				RDSAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_db_event_subscription", "aws", RDSAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

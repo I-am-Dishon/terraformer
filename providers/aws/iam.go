@@ -75,21 +75,11 @@ func (g *IamGenerator) getRoles(svc *iam.Client) error {
 	for p.Next(context.Background()) {
 		for _, role := range p.CurrentPage().Roles {
 			roleName := aws.StringValue(role.RoleName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				roleName,
-				roleName,
-				"aws_iam_role",
-				"aws",
-				IamAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, roleName, roleName, "aws_iam_role", "aws", IamAllowEmptyValues))
 			rolePoliciesPage := iam.NewListRolePoliciesPaginator(svc.ListRolePoliciesRequest(&iam.ListRolePoliciesInput{RoleName: role.RoleName}))
 			for rolePoliciesPage.Next(context.Background()) {
 				for _, policyName := range rolePoliciesPage.CurrentPage().PolicyNames {
-					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-						roleName+":"+policyName,
-						roleName+"_"+policyName,
-						"aws_iam_role_policy",
-						"aws",
-						IamAllowEmptyValues))
+					g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, roleName+":"+policyName, roleName+"_"+policyName, "aws_iam_role_policy", "aws", IamAllowEmptyValues))
 				}
 			}
 			if err := rolePoliciesPage.Err(); err != nil {
@@ -185,12 +175,7 @@ func (g *IamGenerator) getUserPolices(svc *iam.Client, userName *string) error {
 			resourceName := aws.StringValue(userName) + "_" + policy
 			resourceName = strings.ReplaceAll(resourceName, "@", "")
 			policyID := aws.StringValue(userName) + ":" + policy
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				policyID,
-				resourceName,
-				"aws_iam_user_policy",
-				"aws",
-				IamAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, policyID, resourceName, "aws_iam_user_policy", "aws", IamAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -225,12 +210,7 @@ func (g *IamGenerator) getPolicies(svc *iam.Client) error {
 			resourceName := aws.StringValue(policy.PolicyName)
 			policyARN := aws.StringValue(policy.Arn)
 
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				policyARN,
-				resourceName,
-				"aws_iam_policy",
-				"aws",
-				IamAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, policyARN, resourceName, "aws_iam_policy", "aws", IamAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -241,12 +221,7 @@ func (g *IamGenerator) getGroups(svc *iam.Client) error {
 	for p.Next(context.Background()) {
 		for _, group := range p.CurrentPage().Groups {
 			resourceName := aws.StringValue(group.GroupName)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_iam_group",
-				"aws",
-				IamAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_iam_group", "aws", IamAllowEmptyValues))
 			g.getGroupPolicies(svc, group)
 			g.getAttachedGroupPolicies(svc, group)
 		}

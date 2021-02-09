@@ -28,7 +28,8 @@ func main() {
 			allProviders = append(allProviders, providerName)
 		}
 	}
-	for _, OS := range []string{"linux", "windows", "mac"} {
+	// "linux", "windows", 
+	for _, OS := range []string{"mac"} {
 		for _, provider := range allProviders {
 			GOOS := ""
 			binaryName := ""

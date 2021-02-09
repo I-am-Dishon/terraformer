@@ -58,12 +58,7 @@ func (g *DNSGenerator) listRecordSets(resourceGroupName string, zoneName string,
 			"TXT":   "azurerm_dns_txt_record",
 		}
 		if resName, exist := typeResourceNameMap[recordType]; exist {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*recordSet.ID,
-				*recordSet.Name,
-				resName,
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *recordSet.ID, *recordSet.Name, resName, g.ProviderName, []string{}))
 		}
 
 		if err := recordSetIterator.Next(); err != nil {
@@ -99,12 +94,7 @@ func (g *DNSGenerator) listAndAddForDNSZone() ([]terraformutils.Resource, error)
 	}
 	for dnsZoneIterator.NotDone() {
 		zone := dnsZoneIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*zone.ID,
-			*zone.Name,
-			"azurerm_dns_zone",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *zone.ID, *zone.Name, "azurerm_dns_zone", g.ProviderName, []string{}))
 
 		id, err := ParseAzureResourceID(*zone.ID)
 		if err != nil {

@@ -72,12 +72,7 @@ func (g *DiskGenerator) InitResources() error {
 func (g *DiskGenerator) createResources(disks []*compute.Disk) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, disk := range disks {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			disk.GetId(),
-			disk.GetId(),
-			"yandex_compute_disk",
-			"yandex",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, disk.GetId(), disk.GetId(), "yandex_compute_disk", "yandex", []string{}))
 	}
 	return resources
 }

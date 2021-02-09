@@ -56,12 +56,7 @@ func (g *PrivateDNSGenerator) listRecordSets(resourceGroupName string, privateZo
 			"TXT":   "azurerm_private_dns_txt_record",
 		}
 		if resName, exist := typeResourceNameMap[recordType]; exist {
-			resources = append(resources, terraformutils.NewSimpleResource(
-				*recordSet.ID,
-				*recordSet.Name,
-				resName,
-				g.ProviderName,
-				[]string{}))
+			resources = append(resources, terraformutils.NewSimpleResource(0, *recordSet.ID, *recordSet.Name, resName, g.ProviderName, []string{}))
 		}
 
 		if err := recordSetIterator.Next(); err != nil {
@@ -86,12 +81,7 @@ func (g *PrivateDNSGenerator) listVirtualNetworkLinks(resourceGroupName string, 
 	}
 	for virtualNetworkLinkIterator.NotDone() {
 		virtualNetworkLink := virtualNetworkLinkIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*virtualNetworkLink.ID,
-			*virtualNetworkLink.Name,
-			"azurerm_private_dns_zone_virtual_network_link",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *virtualNetworkLink.ID, *virtualNetworkLink.Name, "azurerm_private_dns_zone_virtual_network_link", g.ProviderName, []string{}))
 
 		if err := virtualNetworkLinkIterator.Next(); err != nil {
 			log.Println(err)
@@ -126,12 +116,7 @@ func (g *PrivateDNSGenerator) listAndAddForPrivateDNSZone() ([]terraformutils.Re
 	}
 	for dnsZoneIterator.NotDone() {
 		zone := dnsZoneIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*zone.ID,
-			*zone.Name,
-			"azurerm_private_dns_zone",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *zone.ID, *zone.Name, "azurerm_private_dns_zone", g.ProviderName, []string{}))
 
 		id, err := ParseAzureResourceID(*zone.ID)
 		if err != nil {

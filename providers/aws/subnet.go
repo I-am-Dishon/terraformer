@@ -31,13 +31,7 @@ type SubnetGenerator struct {
 func (SubnetGenerator) createResources(subnets *ec2.DescribeSubnetsOutput) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, subnet := range subnets.Subnets {
-		resource := terraformutils.NewSimpleResource(
-			aws.StringValue(subnet.SubnetId),
-			aws.StringValue(subnet.SubnetId),
-			"aws_subnet",
-			"aws",
-			SubnetAllowEmptyValues,
-		)
+		resource := terraformutils.NewSimpleResource(0, aws.StringValue(subnet.SubnetId), aws.StringValue(subnet.SubnetId), "aws_subnet", "aws", SubnetAllowEmptyValues, )
 		resource.IgnoreKeys = append(resource.IgnoreKeys, "availability_zone")
 		resources = append(resources, resource)
 	}

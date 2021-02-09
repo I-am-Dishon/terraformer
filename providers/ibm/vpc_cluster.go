@@ -30,23 +30,13 @@ type VPCClusterGenerator struct {
 
 func (g VPCClusterGenerator) loadcluster(clustersID, clusterName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		clustersID,
-		clusterName,
-		"ibm_container_vpc_cluster",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, clustersID, clusterName, "ibm_container_vpc_cluster", "ibm", []string{})
 	return resources
 }
 
 func (g VPCClusterGenerator) loadWorkerPools(clustersID, poolID, PoolName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", clustersID, poolID),
-		PoolName,
-		"ibm_container_vpc_worker_pool",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", clustersID, poolID), PoolName, "ibm_container_vpc_worker_pool", "ibm", []string{})
 	return resources
 }
 

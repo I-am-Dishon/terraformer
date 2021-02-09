@@ -30,12 +30,7 @@ func (g *TeamGenerator) createTeamResources(client *ns1.APIClient) error {
 	}
 
 	for _, t := range teams {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			t.Id,
-			t.Id,
-			"ns1_team",
-			"ns1",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, t.Id, t.Id, "ns1_team", "ns1", []string{}))
 	}
 
 	return nil

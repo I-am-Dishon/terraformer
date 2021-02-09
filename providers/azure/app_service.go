@@ -35,12 +35,7 @@ func (g AppServiceGenerator) listApps() ([]terraformutils.Resource, error) {
 	}
 	for appsIterator.NotDone() {
 		site := appsIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*site.ID,
-			*site.Name,
-			"azurerm_app_service",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *site.ID, *site.Name, "azurerm_app_service", g.ProviderName, []string{}))
 
 		if err := appsIterator.NextWithContext(ctx); err != nil {
 			log.Println(err)

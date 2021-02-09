@@ -98,12 +98,7 @@ func (g *IotGenerator) loadTopicRules(svc *iot.Client) error {
 		return err
 	}
 	for _, rule := range output.Rules {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*rule.RuleName,
-			*rule.RuleName,
-			"aws_iot_topic_rule",
-			"aws",
-			iotAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *rule.RuleName, *rule.RuleName, "aws_iot_topic_rule", "aws", iotAllowEmptyValues))
 	}
 	return nil
 }
@@ -114,12 +109,7 @@ func (g *IotGenerator) loadRoleAliases(svc *iot.Client) error {
 		return err
 	}
 	for _, roleAlias := range output.RoleAliases {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			roleAlias,
-			roleAlias,
-			"aws_iot_role_alias",
-			"aws",
-			iotAllowEmptyValues))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, roleAlias, roleAlias, "aws_iot_role_alias", "aws", iotAllowEmptyValues))
 	}
 	return nil
 }

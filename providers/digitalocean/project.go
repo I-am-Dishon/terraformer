@@ -58,12 +58,7 @@ func (g ProjectGenerator) listProjects(ctx context.Context, client *godo.Client)
 func (g ProjectGenerator) createResources(projectList []godo.Project) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, project := range projectList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			project.ID,
-			project.Name,
-			"digitalocean_project",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, project.ID, project.Name, "digitalocean_project", "digitalocean", []string{}))
 	}
 	return resources
 }

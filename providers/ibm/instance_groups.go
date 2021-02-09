@@ -32,12 +32,7 @@ type InstanceGroupGenerator struct {
 
 func (g *InstanceGroupGenerator) loadInstanceGroup(instanceGroupID, instanceGroupName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		instanceGroupID,
-		instanceGroupName,
-		"ibm_is_instance_group",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, instanceGroupID, instanceGroupName, "ibm_is_instance_group", "ibm", []string{})
 	return resources
 }
 
@@ -46,12 +41,7 @@ func (g *InstanceGroupGenerator) loadInstanceGroupManger(instanceGroupID, instan
 		managerName = fmt.Sprintf("manager-%d-%d", rand.Intn(100), rand.Intn(50))
 	}
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", instanceGroupID, instanceGroupManagerID),
-		managerName,
-		"ibm_is_instance_group_manager",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", instanceGroupID, instanceGroupManagerID), managerName, "ibm_is_instance_group_manager", "ibm", []string{})
 	return resources
 }
 
@@ -60,12 +50,7 @@ func (g *InstanceGroupGenerator) loadInstanceGroupMangerPolicy(instanceGroupID, 
 		policyName = fmt.Sprintf("manager-%d-%d", rand.Intn(100), rand.Intn(50))
 	}
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s/%s", instanceGroupID, instanceGroupManagerID, PolicyID),
-		policyName,
-		"ibm_is_instance_group_manager_policy",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s/%s", instanceGroupID, instanceGroupManagerID, PolicyID), policyName, "ibm_is_instance_group_manager_policy", "ibm", []string{})
 	return resources
 }
 

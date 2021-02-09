@@ -25,12 +25,7 @@ func (g *XrayGenerator) InitResources() error {
 		for _, samplingRule := range p.CurrentPage().SamplingRuleRecords {
 			// NOTE: Builtin rule with unmodifiable name and 10000 prirority (lowest)
 			if *samplingRule.SamplingRule.RuleName != "Default" {
-				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-					*samplingRule.SamplingRule.RuleName,
-					*samplingRule.SamplingRule.RuleName,
-					"aws_xray_sampling_rule",
-					"aws",
-					xrayAllowEmptyValues))
+				g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *samplingRule.SamplingRule.RuleName, *samplingRule.SamplingRule.RuleName, "aws_xray_sampling_rule", "aws", xrayAllowEmptyValues))
 
 				if err := p.Err(); err != nil {
 					return err

@@ -37,13 +37,7 @@ func (g *MskGenerator) InitResources() error {
 	p := kafka.NewListClustersPaginator(svc.ListClustersRequest(&kafka.ListClustersInput{}))
 	for p.Next(context.Background()) {
 		for _, clusterInfo := range p.CurrentPage().ClusterInfoList {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(clusterInfo.ClusterArn),
-				aws.StringValue(clusterInfo.ClusterName),
-				"aws_msk_cluster",
-				"aws",
-				mskAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(clusterInfo.ClusterArn), aws.StringValue(clusterInfo.ClusterName), "aws_msk_cluster", "aws", mskAllowEmptyValues, ))
 		}
 	}
 

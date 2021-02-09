@@ -30,12 +30,7 @@ func (g *MonitoringJobGenerator) createMonitoringJobResources(client *ns1.APICli
 	}
 
 	for _, j := range jobs {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			j.Id,
-			j.Id,
-			"ns1_monitoringjob",
-			"ns1",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, j.Id, j.Id, "ns1_monitoringjob", "ns1", []string{}))
 	}
 
 	return nil

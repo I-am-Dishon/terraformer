@@ -50,13 +50,7 @@ func (g *UserSSHKeyGenerator) InitResources() error {
 		}
 
 		for _, key := range keys {
-			resource := terraformutils.NewSimpleResource(
-				strconv.FormatInt(key.GetID(), 10),
-				strconv.FormatInt(key.GetID(), 10),
-				"github_user_ssh_key",
-				"github",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, strconv.FormatInt(key.GetID(), 10), strconv.FormatInt(key.GetID(), 10), "github_user_ssh_key", "github", []string{}, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

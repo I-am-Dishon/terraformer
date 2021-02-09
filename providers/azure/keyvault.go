@@ -36,12 +36,7 @@ func (g KeyVaultGenerator) createResources(ctx context.Context, client keyvault.
 	var resources []terraformutils.Resource
 	for resourceListResultIterator.NotDone() {
 		vault := resourceListResultIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*vault.ID,
-			*vault.Name,
-			"azurerm_key_vault",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *vault.ID, *vault.Name, "azurerm_key_vault", "azurerm", []string{}))
 		if err := resourceListResultIterator.NextWithContext(ctx); err != nil {
 			log.Println(err)
 			return resources, err
@@ -58,12 +53,7 @@ func (g KeyVaultGenerator) createResourcesByResourceGroup(ctx context.Context, r
 	var resources []terraformutils.Resource
 	for iterator.NotDone() {
 		vault := iterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*vault.ID,
-			*vault.Name,
-			"azurerm_key_vault",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *vault.ID, *vault.Name, "azurerm_key_vault", "azurerm", []string{}))
 		if err := iterator.NextWithContext(ctx); err != nil {
 			log.Println(err)
 			return resources, err

@@ -30,34 +30,19 @@ type ContainerClusterGenerator struct {
 
 func (g ContainerClusterGenerator) loadcluster(clustersID, clusterName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		clustersID,
-		clusterName,
-		"ibm_container_cluster",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, clustersID, clusterName, "ibm_container_cluster", "ibm", []string{})
 	return resources
 }
 
 func (g ContainerClusterGenerator) loadWorkerPools(clustersID, poolID, PoolName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s", clustersID, poolID),
-		PoolName,
-		"ibm_container_worker_pool",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", clustersID, poolID), PoolName, "ibm_container_worker_pool", "ibm", []string{})
 	return resources
 }
 
 func (g ContainerClusterGenerator) loadWorkerPoolZones(clustersID, poolID, zoneID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s/%s/%s", clustersID, poolID, zoneID),
-		zoneID,
-		"ibm_container_worker_pool_zone_attachment",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s/%s", clustersID, poolID, zoneID), zoneID, "ibm_container_worker_pool_zone_attachment", "ibm", []string{})
 	return resources
 }
 

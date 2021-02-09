@@ -44,13 +44,7 @@ func (g *EcsGenerator) InitResources() error {
 			arnParts := strings.Split(clusterArn, "/")
 			clusterName := arnParts[len(arnParts)-1]
 
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				clusterArn,
-				clusterName,
-				"aws_ecs_cluster",
-				"aws",
-				ecsAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, clusterArn, clusterName, "aws_ecs_cluster", "aws", ecsAllowEmptyValues, ))
 
 			servicePage := ecs.NewListServicesPaginator(svc.ListServicesRequest(&ecs.ListServicesInput{
 				Cluster: aws.String(clusterArn),

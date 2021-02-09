@@ -28,12 +28,7 @@ type AddOnGenerator struct {
 func (g AddOnGenerator) createResources(addOnList []heroku.AddOn) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, addOn := range addOnList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			addOn.ID,
-			addOn.Name,
-			"heroku_addon",
-			"heroku",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, addOn.ID, addOn.Name, "heroku_addon", "heroku", []string{}))
 	}
 	return resources
 }

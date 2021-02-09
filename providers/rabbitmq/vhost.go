@@ -35,13 +35,7 @@ var VhostAllowEmptyValues = []string{}
 func (g VhostGenerator) createResources(vhosts Vhosts) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, vhost := range vhosts {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			vhost.Name,
-			"vhost_"+normalizeResourceName(vhost.Name),
-			"rabbitmq_vhost",
-			"rabbitmq",
-			VhostAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, vhost.Name, "vhost_"+normalizeResourceName(vhost.Name), "rabbitmq_vhost", "rabbitmq", VhostAllowEmptyValues, ))
 	}
 	return resources
 }

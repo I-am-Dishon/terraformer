@@ -72,12 +72,7 @@ func (g *NetworkGenerator) InitResources() error {
 func (g *NetworkGenerator) createResources(networks []*vpc.Network) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, network := range networks {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			network.GetId(),
-			network.GetId(),
-			"yandex_vpc_network",
-			"yandex",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, network.GetId(), network.GetId(), "yandex_vpc_network", "yandex", []string{}))
 	}
 	return resources
 }

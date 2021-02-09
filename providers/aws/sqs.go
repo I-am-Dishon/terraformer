@@ -56,13 +56,7 @@ func (g *SqsGenerator) InitResources() error {
 		urlParts := strings.Split(queueURL, "/")
 		queueName := urlParts[len(urlParts)-1]
 
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			queueURL,
-			queueName,
-			"aws_sqs_queue",
-			"aws",
-			sqsAllowEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, queueURL, queueName, "aws_sqs_queue", "aws", sqsAllowEmptyValues, ))
 	}
 
 	return nil

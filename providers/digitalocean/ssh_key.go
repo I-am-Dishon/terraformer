@@ -59,12 +59,7 @@ func (g SSHKeyGenerator) listKeys(ctx context.Context, client *godo.Client) ([]g
 func (g SSHKeyGenerator) createResources(keyList []godo.Key) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, key := range keyList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(key.ID),
-			key.Name,
-			"digitalocean_ssh_key",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(key.ID), key.Name, "digitalocean_ssh_key", "digitalocean", []string{}))
 	}
 	return resources
 }

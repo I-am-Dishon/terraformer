@@ -50,13 +50,7 @@ func (g *OrganizationWebhooksGenerator) InitResources() error {
 		}
 
 		for _, hook := range hooks {
-			resource := terraformutils.NewSimpleResource(
-				strconv.FormatInt(hook.GetID(), 10),
-				strconv.FormatInt(hook.GetID(), 10),
-				"github_organization_webhook",
-				"github",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, strconv.FormatInt(hook.GetID(), 10), strconv.FormatInt(hook.GetID(), 10), "github_organization_webhook", "github", []string{}, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

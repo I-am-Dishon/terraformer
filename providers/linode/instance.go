@@ -29,12 +29,7 @@ type InstanceGenerator struct {
 func (g InstanceGenerator) createResources(instanceList []linodego.Instance) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, instance := range instanceList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(instance.ID),
-			strconv.Itoa(instance.ID),
-			"linode_instance",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, strconv.Itoa(instance.ID), strconv.Itoa(instance.ID), "linode_instance", "linode", []string{}))
 	}
 	return resources
 }

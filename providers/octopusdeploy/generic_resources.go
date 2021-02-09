@@ -43,13 +43,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_account",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_account", g.ProviderName, []string{}, ))
 		}
 	case "certificates":
 		resources, err := client.Certificate.GetAll()
@@ -58,13 +52,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_certificate",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_certificate", g.ProviderName, []string{}, ))
 		}
 	// case "channels":
 	// TODO: Somehow there is an issue with the channels:
@@ -92,13 +80,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_environment",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_environment", g.ProviderName, []string{}, ))
 		}
 	case "feeds":
 		resources, err := client.Feed.GetAll()
@@ -107,13 +89,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_feed",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_feed", g.ProviderName, []string{}, ))
 		}
 	case "libraryvariablesets":
 		resources, err := client.LibraryVariableSet.GetAll()
@@ -122,13 +98,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_library_variable_set",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_library_variable_set", g.ProviderName, []string{}, ))
 		}
 	case "lifecycles":
 		resources, err := client.Lifecycle.GetAll()
@@ -137,13 +107,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_lifecycle",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_lifecycle", g.ProviderName, []string{}, ))
 		}
 	case "projects":
 		resources, err := client.Project.GetAll()
@@ -152,13 +116,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_project",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_project", g.ProviderName, []string{}, ))
 		}
 	case "projectgroups":
 		resources, err := client.ProjectGroup.GetAll()
@@ -167,13 +125,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_project_group",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_project_group", g.ProviderName, []string{}, ))
 		}
 	case "projecttriggers":
 		resources, err := client.ProjectTrigger.GetAll()
@@ -182,13 +134,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_project_deployment_target_trigger",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_project_deployment_target_trigger", g.ProviderName, []string{}, ))
 		}
 	case "tagsets":
 		resources, err := client.TagSet.GetAll()
@@ -197,13 +143,7 @@ func (g *GenericGenerator) createResources(client *octopusdeploy.Client) error {
 		}
 
 		for _, ressource := range *resources {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				ressource.ID,
-				ressource.Name,
-				"octopusdeploy_tag_set",
-				g.ProviderName,
-				[]string{},
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, ressource.ID, ressource.Name, "octopusdeploy_tag_set", g.ProviderName, []string{}, ))
 		}
 		// case "variables":
 		// TODO: This cannot generate a `variables.tf` file as there is already one.

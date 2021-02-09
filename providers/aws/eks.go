@@ -36,13 +36,7 @@ func (g *EksGenerator) InitResources() error {
 	p := eks.NewListClustersPaginator(svc.ListClustersRequest(&eks.ListClustersInput{}))
 	for p.Next(context.Background()) {
 		for _, clusterName := range p.CurrentPage().Clusters {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				clusterName,
-				clusterName,
-				"aws_eks_cluster",
-				"aws",
-				eksAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, clusterName, clusterName, "aws_eks_cluster", "aws", eksAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

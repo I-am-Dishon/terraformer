@@ -40,12 +40,7 @@ func (g *RedisGenerator) listRedisServers() ([]terraformutils.Resource, error) {
 
 	for redisServersIterator.NotDone() {
 		redisServer := redisServersIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*redisServer.ID,
-			*redisServer.Name,
-			"azurerm_redis_cache",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *redisServer.ID, *redisServer.Name, "azurerm_redis_cache", g.ProviderName, []string{}))
 
 		if err := redisServersIterator.Next(); err != nil {
 			log.Println(err)

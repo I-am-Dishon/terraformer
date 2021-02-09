@@ -40,12 +40,7 @@ func (g *DataPipelineGenerator) InitResources() error {
 		for _, pipeline := range p.CurrentPage().PipelineIdList {
 			pipelineID := aws.StringValue(pipeline.Id)
 			pipelineName := aws.StringValue(pipeline.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				pipelineID,
-				pipelineName,
-				"aws_datapipeline_pipeline",
-				"aws",
-				datapipelineAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, pipelineID, pipelineName, "aws_datapipeline_pipeline", "aws", datapipelineAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

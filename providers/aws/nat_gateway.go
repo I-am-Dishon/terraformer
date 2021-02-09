@@ -32,13 +32,7 @@ type NatGatewayGenerator struct {
 func (g *NatGatewayGenerator) createResources(ngws *ec2.DescribeNatGatewaysOutput) []terraformutils.Resource {
 	resources := []terraformutils.Resource{}
 	for _, ngw := range ngws.NatGateways {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(ngw.NatGatewayId),
-			aws.StringValue(ngw.NatGatewayId),
-			"aws_nat_gateway",
-			"aws",
-			ngwAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(ngw.NatGatewayId), aws.StringValue(ngw.NatGatewayId), "aws_nat_gateway", "aws", ngwAllowEmptyValues, ))
 	}
 
 	return resources

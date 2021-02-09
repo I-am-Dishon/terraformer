@@ -28,12 +28,7 @@ type ReservedIPGenerator struct {
 func (g ReservedIPGenerator) createResources(ipList []govultr.ReservedIP) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, ip := range ipList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			ip.ReservedIPID,
-			ip.ReservedIPID,
-			"vultr_reserved_ip",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, ip.ReservedIPID, ip.ReservedIPID, "vultr_reserved_ip", "vultr", []string{}))
 	}
 	return resources
 }

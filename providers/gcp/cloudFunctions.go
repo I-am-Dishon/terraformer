@@ -38,13 +38,7 @@ func (g CloudFunctionsGenerator) createResources(ctx context.Context, functionsL
 		for _, functions := range page.Functions {
 			t := strings.Split(functions.Name, "/")
 			name := t[len(t)-1]
-			resources = append(resources, terraformutils.NewSimpleResource(
-				g.GetArgs()["project"].(string)+"/"+g.GetArgs()["region"].(compute.Region).Name+"/"+name,
-				g.GetArgs()["region"].(compute.Region).Name+"_"+name,
-				"google_cloudfunctions_function",
-				g.ProviderName,
-				cloudFunctionsAllowEmptyValues,
-			))
+			resources = append(resources, terraformutils.NewSimpleResource(0, g.GetArgs()["project"].(string)+"/"+g.GetArgs()["region"].(compute.Region).Name+"/"+name, g.GetArgs()["region"].(compute.Region).Name+"_"+name, "google_cloudfunctions_function", g.ProviderName, cloudFunctionsAllowEmptyValues, ))
 		}
 		return nil
 	}); err != nil {

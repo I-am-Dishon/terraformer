@@ -49,13 +49,7 @@ func (g *OrganizationBlockGenerator) InitResources() error {
 		}
 
 		for _, block := range blocks {
-			resource := terraformutils.NewSimpleResource(
-				block.GetLogin(),
-				block.GetLogin(),
-				"github_organization_block",
-				"github",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, block.GetLogin(), block.GetLogin(), "github_organization_block", "github", []string{}, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

@@ -41,100 +41,55 @@ type CISGenerator struct {
 
 func (g CISGenerator) loadInstances(crn, name string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		crn,
-		name,
-		"ibm_cis",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, crn, name, "ibm_cis", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadDomains(crn, domainID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s", domainID, crn),
-		domainID,
-		"ibm_cis_domain",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", domainID, crn), domainID, "ibm_cis_domain", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadDNSRecords(crn, domainID, dnsRecordID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s:%s", dnsRecordID, domainID, crn),
-		dnsRecordID,
-		"ibm_cis_dns_record",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s:%s", dnsRecordID, domainID, crn), dnsRecordID, "ibm_cis_dns_record", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadFirewallLockdown(crn, domainID, fID, fType string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s:%s:%s", fType, fID, domainID, crn),
-		fID,
-		"ibm_cis_firewall",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s:%s:%s", fType, fID, domainID, crn), fID, "ibm_cis_firewall", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadDomainSettings(crn, dID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s", dID, crn),
-		dID,
-		"ibm_cis_domain_settings",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", dID, crn), dID, "ibm_cis_domain_settings", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadGlobalBalancer(crn, dID, gID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s:%s", gID, dID, crn),
-		dID,
-		"ibm_cis_global_load_balancer",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s:%s", gID, dID, crn), dID, "ibm_cis_global_load_balancer", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadGlobalBalancerPool(crn, pID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s", pID, crn),
-		pID,
-		"ibm_cis_origin_pool",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", pID, crn), pID, "ibm_cis_origin_pool", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadGlobalBalancerMonitor(crn, gblmID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s", gblmID, crn),
-		gblmID,
-		"ibm_cis_healthcheck",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s", gblmID, crn), gblmID, "ibm_cis_healthcheck", g.ProviderName, []string{})
 	return resources
 }
 
 func (g CISGenerator) loadRateLimit(crn, dID, rID string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		fmt.Sprintf("%s:%s:%s", rID, dID, crn),
-		rID,
-		"ibm_cis_rate_limit",
-		g.ProviderName,
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s:%s:%s", rID, dID, crn), rID, "ibm_cis_rate_limit", g.ProviderName, []string{})
 	return resources
 }
 

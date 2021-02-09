@@ -58,12 +58,7 @@ func (g *APIGatewayGenerator) loadRestApis(svc *apigateway.Client) error {
 			if g.shouldFilterRestAPI(restAPI.Tags) {
 				continue
 			}
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*restAPI.Id,
-				*restAPI.Name,
-				"aws_api_gateway_rest_api",
-				"aws",
-				apiGatewayAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *restAPI.Id, *restAPI.Name, "aws_api_gateway_rest_api", "aws", apiGatewayAllowEmptyValues))
 			if err := g.loadStages(svc, restAPI.Id); err != nil {
 				return err
 			}
@@ -327,13 +322,7 @@ func (g *APIGatewayGenerator) loadDocumentationParts(svc *apigateway.Client, res
 		}
 		for _, documentationPart := range response.Items {
 			documentationPartID := *restAPIID + "/" + *documentationPart.Id
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				documentationPartID,
-				documentationPartID,
-				"aws_api_gateway_documentation_part",
-				"aws",
-				apiGatewayAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, documentationPartID, documentationPartID, "aws_api_gateway_documentation_part", "aws", apiGatewayAllowEmptyValues, ))
 		}
 		position = response.Position
 		if position == nil {
@@ -379,12 +368,7 @@ func (g *APIGatewayGenerator) loadVpcLinks(svc *apigateway.Client) error {
 	p := apigateway.NewGetVpcLinksPaginator(svc.GetVpcLinksRequest(&apigateway.GetVpcLinksInput{}))
 	for p.Next(context.Background()) {
 		for _, vpcLink := range p.CurrentPage().Items {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*vpcLink.Id,
-				*vpcLink.Name,
-				"aws_api_gateway_vpc_link",
-				"aws",
-				apiGatewayAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *vpcLink.Id, *vpcLink.Name, "aws_api_gateway_vpc_link", "aws", apiGatewayAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -394,12 +378,7 @@ func (g *APIGatewayGenerator) loadUsagePlans(svc *apigateway.Client) error {
 	p := apigateway.NewGetUsagePlansPaginator(svc.GetUsagePlansRequest(&apigateway.GetUsagePlansInput{}))
 	for p.Next(context.Background()) {
 		for _, usagePlan := range p.CurrentPage().Items {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*usagePlan.Id,
-				*usagePlan.Name,
-				"aws_api_gateway_usage_plan",
-				"aws",
-				apiGatewayAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *usagePlan.Id, *usagePlan.Name, "aws_api_gateway_usage_plan", "aws", apiGatewayAllowEmptyValues))
 		}
 	}
 	return p.Err()

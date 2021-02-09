@@ -51,13 +51,7 @@ func (g IamGenerator) createServiceAccountResources(serviceAccountsIterator *adm
 			log.Printf("skipping %s: service account email must start with [a-z]\n", serviceAccount.Name)
 			continue
 		}
-		resources = append(resources, terraformutils.NewSimpleResource(
-			serviceAccount.Name,
-			serviceAccount.UniqueId,
-			"google_service_account",
-			g.ProviderName,
-			IamAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, serviceAccount.Name, serviceAccount.UniqueId, "google_service_account", g.ProviderName, IamAllowEmptyValues, ))
 	}
 	return resources
 }

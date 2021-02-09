@@ -1,10 +1,23 @@
+// Copyright 2019 The Terraformer Authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package gitlab
 
 import (
 	"errors"
-	"os"
-	"net/url"
 	"github.com/GoogleCloudPlatform/terraformer/terraformutils"
+	"os"
 )
 
 type GitlabProvider struct { //nolint
@@ -19,12 +32,16 @@ func (p *GitlabProvider) Init(args []string) error {
 	}
 	p.token = os.Getenv("GITLAB_TOKEN")
 
-	gitlabUrl, err := url.Parse(args[1])
-	
-	if err != nil || gitlabUrl.Host == "" || gitlabUrl.Scheme == "" {
-		return errors.New("give a valid URL")
+	if os.Getenv("GITLAB_BASE_URL") == "" {
+		return errors.New("set GITLAB_BASE_URL env var")
 	}
-	p.url = gitlabUrl.String()
+	p.url = os.Getenv("GITLAB_BASE_URL")
+	//gitlabUrl, err := url.Parse(args[2])
+	//log.Println("importing gitlab" + gitlabUrl.String())
+	//if err != nil || gitlabUrl.Host == "" || gitlabUrl.Scheme == "" {
+	//	return errors.New("give a valid URL")
+	//}
+	//p.url = gitlabUrl.String()
 
 	return nil
 }

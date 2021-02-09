@@ -29,12 +29,7 @@ func (g *UserGenerator) loadUsers(client *fastly.Client, customerID string) erro
 		return err
 	}
 	for _, user := range users {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			user.ID,
-			user.ID,
-			"fastly_user_v1",
-			"fastly",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, user.ID, user.ID, "fastly_user_v1", "fastly", []string{}))
 	}
 	return nil
 }

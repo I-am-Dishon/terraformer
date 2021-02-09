@@ -31,12 +31,7 @@ func (g DhcpLeaseGenerator) createResources(leases []client.DhcpLease) []terrafo
 		if lease.Hostname != "" {
 			resourceName = fmt.Sprintf("%s-%s", lease.Hostname, lease.Id)
 		}
-		resources = append(resources, terraformutils.NewSimpleResource(
-			lease.Id,
-			resourceName,
-			"mikrotik_dhcp_lease",
-			"mikrotik",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, lease.Id, resourceName, "mikrotik_dhcp_lease", "mikrotik", []string{}))
 	}
 	return resources
 }

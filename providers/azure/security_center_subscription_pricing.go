@@ -31,12 +31,7 @@ func (g SecurityCenterSubscriptionPricingGenerator) listSubscriptionPricing() ([
 	}
 
 	for _, pricing := range *pricingList.Value {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*pricing.ID,
-			*pricing.Name,
-			"azurerm_security_center_subscription_pricing",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *pricing.ID, *pricing.Name, "azurerm_security_center_subscription_pricing", g.ProviderName, []string{}))
 	}
 
 	return resources, nil

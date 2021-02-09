@@ -38,12 +38,7 @@ func (g *SyntheticsGenerator) createSyntheticsAlertConditionResources(client *ne
 			return err
 		}
 		for _, syntheticsAlertCondition := range syntheticsAlertConditions {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				fmt.Sprintf("%d:%d", alertPolicy.ID, syntheticsAlertCondition.ID),
-				fmt.Sprintf("%s-%d", normalizeResourceName(alertPolicy.Name), alertPolicy.ID),
-				"newrelic_synthetics_alert_condition",
-				g.ProviderName,
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, fmt.Sprintf("%d:%d", alertPolicy.ID, syntheticsAlertCondition.ID), fmt.Sprintf("%s-%d", normalizeResourceName(alertPolicy.Name), alertPolicy.ID), "newrelic_synthetics_alert_condition", g.ProviderName, []string{}))
 		}
 	}
 
@@ -61,12 +56,7 @@ func (g *SyntheticsGenerator) createSyntheticsMonitorResources(client *synthetic
 
 	for allMonitors.Count > 0 {
 		for _, monitor := range allMonitors.Monitors {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				fmt.Sprint(monitor.ID),
-				fmt.Sprintf("%s-%s", normalizeResourceName(monitor.Name), monitor.ID),
-				"newrelic_synthetics_monitor",
-				g.ProviderName,
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, fmt.Sprint(monitor.ID), fmt.Sprintf("%s-%s", normalizeResourceName(monitor.Name), monitor.ID), "newrelic_synthetics_monitor", g.ProviderName, ""))
 		}
 
 		offset += allMonitors.Count

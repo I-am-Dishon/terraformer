@@ -28,12 +28,7 @@ type NetworkGenerator struct {
 func (g NetworkGenerator) createResources(networkList []govultr.Network) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, network := range networkList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			network.NetworkID,
-			network.NetworkID,
-			"vultr_network",
-			"vultr",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, network.NetworkID, network.NetworkID, "vultr_network", "vultr", []string{}))
 	}
 	return resources
 }

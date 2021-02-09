@@ -39,12 +39,7 @@ func (g *MediaPackageGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, channel := range p.CurrentPage().Channels {
 			channelID := aws.StringValue(channel.Id)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				channelID,
-				channelID,
-				"aws_media_package_channel",
-				"aws",
-				mediapackageAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, channelID, channelID, "aws_media_package_channel", "aws", mediapackageAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

@@ -51,12 +51,7 @@ func (g *ContainerGenerator) listAndAddForContainerGroup() ([]terraformutils.Res
 	}
 	for containerGroupIterator.NotDone() {
 		containerGroup := containerGroupIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*containerGroup.ID,
-			*containerGroup.Name,
-			"azurerm_container_group",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(*containerGroup.ID, *containerGroup.Name, "azurerm_container_group", g.ProviderName, []string{}))
 
 		if err := containerGroupIterator.Next(); err != nil {
 			log.Println(err)
@@ -80,12 +75,7 @@ func (g *ContainerGenerator) listRegistryWebhooks(resourceGroupName string, regi
 	}
 	for webhookIterator.NotDone() {
 		webhook := webhookIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*webhook.ID,
-			*webhook.Name,
-			"azurerm_container_registry_webhook",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *webhook.ID, *webhook.Name, "azurerm_container_registry_webhook", g.ProviderName, []string{}))
 		if err := webhookIterator.Next(); err != nil {
 			log.Println(err)
 			break
@@ -117,12 +107,7 @@ func (g *ContainerGenerator) listAndAddForContainerRegistry() ([]terraformutils.
 	}
 	for containerRegistryIterator.NotDone() {
 		containerRegistry := containerRegistryIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*containerRegistry.ID,
-			*containerRegistry.Name,
-			"azurerm_container_registry",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *containerRegistry.ID, *containerRegistry.Name, "azurerm_container_registry", g.ProviderName, []string{}))
 
 		id, err := ParseAzureResourceID(*containerRegistry.ID)
 		if err != nil {

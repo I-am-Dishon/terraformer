@@ -174,12 +174,7 @@ func (g *LoadBalancerGenerator) listAndAddForLoadBalancers() ([]terraformutils.R
 	}
 	for loadBalancerIterator.NotDone() {
 		loadBalancer := loadBalancerIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*loadBalancer.ID,
-			*loadBalancer.Name,
-			"azurerm_lb",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *loadBalancer.ID, *loadBalancer.Name, "azurerm_lb", g.ProviderName, []string{}))
 
 		id, err := ParseAzureResourceID(*loadBalancer.ID)
 		if err != nil {

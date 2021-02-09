@@ -32,12 +32,7 @@ func (g *NodeBalancerGenerator) loadNodeBalancers(client linodego.Client) ([]lin
 		return nil, err
 	}
 	for _, nodeBalancer := range nodeBalancerList {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			strconv.Itoa(nodeBalancer.ID),
-			strconv.Itoa(nodeBalancer.ID),
-			"linode_nodebalancer",
-			"linode",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, strconv.Itoa(nodeBalancer.ID), strconv.Itoa(nodeBalancer.ID), "linode_nodebalancer", "linode", []string{}))
 	}
 	return nodeBalancerList, nil
 }

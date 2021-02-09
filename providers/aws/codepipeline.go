@@ -33,12 +33,7 @@ func (g *CodePipelineGenerator) loadPipelines(svc *codepipeline.Client) error {
 	for p.Next(context.Background()) {
 		for _, pipeline := range p.CurrentPage().Pipelines {
 			resourceName := aws.StringValue(pipeline.Name)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_codepipeline",
-				"aws",
-				codepipelineAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_codepipeline", "aws", codepipelineAllowEmptyValues))
 		}
 	}
 	return p.Err()
@@ -49,12 +44,7 @@ func (g *CodePipelineGenerator) loadWebhooks(svc *codepipeline.Client) error {
 	for p.Next(context.Background()) {
 		for _, webhook := range p.CurrentPage().Webhooks {
 			resourceArn := aws.StringValue(webhook.Arn)
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				resourceArn,
-				resourceArn,
-				"aws_codepipeline_webhook",
-				"aws",
-				codepipelineAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, resourceArn, resourceArn, "aws_codepipeline_webhook", "aws", codepipelineAllowEmptyValues))
 		}
 	}
 	return p.Err()

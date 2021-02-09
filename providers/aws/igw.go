@@ -38,13 +38,7 @@ func (g *IgwGenerator) createResources(igws *ec2.DescribeInternetGatewaysOutput)
 		if len(internetGateway.Attachments) == 0 {
 			continue
 		}
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(internetGateway.InternetGatewayId),
-			aws.StringValue(internetGateway.InternetGatewayId),
-			"aws_internet_gateway",
-			"aws",
-			IgwAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(internetGateway.InternetGatewayId), aws.StringValue(internetGateway.InternetGatewayId), "aws_internet_gateway", "aws", IgwAllowEmptyValues, ))
 	}
 	return resources
 }

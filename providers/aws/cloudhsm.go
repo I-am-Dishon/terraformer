@@ -38,13 +38,7 @@ func (g *CloudHsmGenerator) InitResources() error {
 	p := cloudhsmv2.NewDescribeClustersPaginator(svc.DescribeClustersRequest(&cloudhsmv2.DescribeClustersInput{}))
 	for p.Next(context.Background()) {
 		for _, cluster := range p.CurrentPage().Clusters {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				aws.StringValue(cluster.ClusterId),
-				aws.StringValue(cluster.ClusterId),
-				"aws_cloudhsm_v2_cluster",
-				"aws",
-				cloudHsmAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, aws.StringValue(cluster.ClusterId), aws.StringValue(cluster.ClusterId), "aws_cloudhsm_v2_cluster", "aws", cloudHsmAllowEmptyValues, ))
 
 			for _, hsm := range cluster.Hsms {
 				g.Resources = append(g.Resources, terraformutils.NewResource(

@@ -58,12 +58,7 @@ func (g LoadBalancerGenerator) listLoadBalancers(ctx context.Context, client *go
 func (g LoadBalancerGenerator) createResources(loadBalancerList []godo.LoadBalancer) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, loadBalancer := range loadBalancerList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			loadBalancer.ID,
-			loadBalancer.Name,
-			"digitalocean_loadbalancer",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, loadBalancer.ID, loadBalancer.Name, "digitalocean_loadbalancer", "digitalocean", []string{}))
 	}
 	return resources
 }

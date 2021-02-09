@@ -58,12 +58,7 @@ func (g FirewallGenerator) listFirewalls(ctx context.Context, client *godo.Clien
 func (g FirewallGenerator) createResources(firewallList []godo.Firewall) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, firewall := range firewallList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			firewall.ID,
-			firewall.Name,
-			"digitalocean_firewall",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, firewall.ID, firewall.Name, "digitalocean_firewall", "digitalocean", []string{}))
 	}
 	return resources
 }

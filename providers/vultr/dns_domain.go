@@ -32,12 +32,7 @@ func (g *DNSDomainGenerator) loadDNSDomains(client *govultr.Client) ([]govultr.D
 		return nil, err
 	}
 	for _, domain := range domainList {
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			domain.Domain,
-			domain.Domain,
-			"vultr_dns_domain",
-			"vultr",
-			[]string{}))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, domain.Domain, domain.Domain, "vultr_dns_domain", "vultr", []string{}))
 	}
 	return domainList, nil
 }

@@ -31,12 +31,7 @@ func (g *AppSyncGenerator) InitResources() error {
 		for _, api := range apis.GraphqlApis {
 			var id = *api.ApiId
 			var name = *api.Name
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				id,
-				name,
-				"aws_appsync_graphql_api",
-				"aws",
-				[]string{}))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, id, name, "aws_appsync_graphql_api", "aws", []string{}))
 		}
 		nextToken = apis.NextToken
 		if nextToken == nil {

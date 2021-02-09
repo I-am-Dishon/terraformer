@@ -72,12 +72,7 @@ func (g *InstanceGenerator) InitResources() error {
 func (g *InstanceGenerator) createResources(instances []*compute.Instance) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, instance := range instances {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			instance.GetId(),
-			instance.GetId(),
-			"yandex_compute_instance",
-			"yandex",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, instance.GetId(), instance.GetId(), "yandex_compute_instance", "yandex", []string{}))
 	}
 	return resources
 }

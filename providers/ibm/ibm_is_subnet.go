@@ -29,12 +29,7 @@ type SubnetGenerator struct {
 
 func (g SubnetGenerator) createSubnetResources(subnetID, subnetName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		subnetID,
-		subnetName,
-		"ibm_is_subnet",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, subnetID, subnetName, "ibm_is_subnet", "ibm", []string{})
 	return resources
 }
 

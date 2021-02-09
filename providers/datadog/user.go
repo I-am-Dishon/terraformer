@@ -44,13 +44,7 @@ func (g *UserGenerator) createResources(users []datadogV1.User) []terraformutils
 }
 
 func (g *UserGenerator) createResource(userID string) terraformutils.Resource {
-	return terraformutils.NewSimpleResource(
-		userID,
-		fmt.Sprintf("user_%s", userID),
-		"datadog_user",
-		"datadog",
-		UserAllowEmptyValues,
-	)
+	return terraformutils.NewSimpleResource(0, userID, fmt.Sprintf("user_%s", userID), "datadog_user", "datadog", UserAllowEmptyValues, )
 }
 
 // InitResources Generate TerraformResources from Datadog API,

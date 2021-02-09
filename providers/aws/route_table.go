@@ -36,13 +36,7 @@ func (g *RouteTableGenerator) createRouteTablesResources(svc *ec2.Client) []terr
 	for p.Next(context.Background()) {
 		for _, table := range p.CurrentPage().RouteTables {
 			// route table
-			resources = append(resources, terraformutils.NewSimpleResource(
-				aws.StringValue(table.RouteTableId),
-				aws.StringValue(table.RouteTableId),
-				"aws_route_table",
-				"aws",
-				rtbAllowEmptyValues,
-			))
+			resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(table.RouteTableId), aws.StringValue(table.RouteTableId), "aws_route_table", "aws", rtbAllowEmptyValues, ))
 
 			for _, assoc := range table.Associations {
 				if aws.BoolValue(assoc.Main) {

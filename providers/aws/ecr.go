@@ -37,24 +37,9 @@ func (g *EcrGenerator) InitResources() error {
 	p := ecr.NewDescribeRepositoriesPaginator(svc.DescribeRepositoriesRequest(&ecr.DescribeRepositoriesInput{}))
 	for p.Next(context.Background()) {
 		for _, repository := range p.CurrentPage().Repositories {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*repository.RepositoryName,
-				*repository.RepositoryName,
-				"aws_ecr_repository",
-				"aws",
-				ecrAllowEmptyValues))
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*repository.RepositoryName,
-				*repository.RepositoryName,
-				"aws_ecr_repository_policy",
-				"aws",
-				ecrAllowEmptyValues))
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*repository.RepositoryName,
-				*repository.RepositoryName,
-				"aws_ecr_lifecycle_policy",
-				"aws",
-				ecrAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *repository.RepositoryName, *repository.RepositoryName, "aws_ecr_repository", "aws", ecrAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *repository.RepositoryName, *repository.RepositoryName, "aws_ecr_repository_policy", "aws", ecrAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *repository.RepositoryName, *repository.RepositoryName, "aws_ecr_lifecycle_policy", "aws", ecrAllowEmptyValues))
 		}
 	}
 	return p.Err()

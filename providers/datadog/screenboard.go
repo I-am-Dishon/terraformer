@@ -37,13 +37,7 @@ func (ScreenboardGenerator) createResources(screenboards []*datadog.ScreenboardL
 	resources := []terraformutils.Resource{}
 	for _, screenboard := range screenboards {
 		resourceName := strconv.Itoa(screenboard.GetId())
-		resources = append(resources, terraformutils.NewSimpleResource(
-			resourceName,
-			fmt.Sprintf("screenboard_%s", resourceName),
-			"datadog_screenboard",
-			"datadog",
-			ScreenboardAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, fmt.Sprintf("screenboard_%s", resourceName), "datadog_screenboard", "datadog", ScreenboardAllowEmptyValues, ))
 	}
 
 	return resources

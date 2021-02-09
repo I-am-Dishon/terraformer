@@ -78,13 +78,7 @@ func (k *Kind) InitResources() error {
 			name = item.FieldByName("Name").String()
 		}
 
-		k.Resources = append(k.Resources, terraformutils.NewSimpleResource(
-			name,
-			name,
-			extractTfResourceName(k.Name),
-			"kubernetes",
-			[]string{},
-		))
+		k.Resources = append(k.Resources, terraformutils.NewSimpleResource(0, name, name, extractTfResourceName(k.Name), "kubernetes", []string{}, ))
 	}
 	return nil
 }

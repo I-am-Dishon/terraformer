@@ -39,12 +39,7 @@ func (g *QLDBGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, ledger := range p.CurrentPage().Ledgers {
 			ledgerName := aws.StringValue(ledger.Name)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				ledgerName,
-				ledgerName,
-				"aws_qldb_ledger",
-				"aws",
-				qldbAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, ledgerName, ledgerName, "aws_qldb_ledger", "aws", qldbAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

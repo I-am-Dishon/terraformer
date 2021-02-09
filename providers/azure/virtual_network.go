@@ -32,12 +32,7 @@ func (g VirtualNetworkGenerator) createResources(ctx context.Context, iterator n
 	var resources []terraformutils.Resource
 	for iterator.NotDone() {
 		virtualNetwork := iterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*virtualNetwork.ID,
-			*virtualNetwork.Name,
-			"azurerm_virtual_network",
-			"azurerm",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *virtualNetwork.ID, *virtualNetwork.Name, "azurerm_virtual_network", "azurerm", []string{}))
 		if err := iterator.NextWithContext(ctx); err != nil {
 			log.Println(err)
 			return resources, err

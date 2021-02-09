@@ -58,12 +58,7 @@ func (g CertificateGenerator) listCertificates(ctx context.Context, client *godo
 func (g CertificateGenerator) createResources(certificateList []godo.Certificate) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, certificate := range certificateList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			certificate.ID,
-			certificate.Name,
-			"digitalocean_certificate",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, certificate.ID, certificate.Name, "digitalocean_certificate", "digitalocean", []string{}))
 	}
 	return resources
 }

@@ -38,23 +38,13 @@ type COSGenerator struct {
 
 func (g COSGenerator) loadCOS(cosID string, cosName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		cosID,
-		cosName,
-		"ibm_resource_instance",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, cosID, cosName, "ibm_resource_instance", "ibm", []string{})
 	return resources
 }
 
 func (g COSGenerator) loadCOSBuckets(bucketID, bucketName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		bucketID,
-		bucketName,
-		"ibm_cos_bucket",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, bucketID, bucketName, "ibm_cos_bucket", "ibm", []string{})
 	return resources
 }
 

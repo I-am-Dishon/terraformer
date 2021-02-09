@@ -29,12 +29,7 @@ type InstanceGenerator struct {
 
 func (g InstanceGenerator) createInstanceResources(instanceID, instanceName string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(
-		instanceID,
-		instanceName,
-		"ibm_is_instance",
-		"ibm",
-		[]string{})
+	resources = terraformutils.NewSimpleResource(0, instanceID, instanceName, "ibm_is_instance", "ibm", []string{})
 	return resources
 }
 

@@ -63,12 +63,7 @@ func (g *CloudWatchGenerator) createMetricAlarms(cloudwatchSvc *cloudwatch.Clien
 			return err
 		}
 		for _, metricAlarm := range output.MetricAlarms {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*metricAlarm.AlarmName,
-				*metricAlarm.AlarmName,
-				"aws_cloudwatch_metric_alarm",
-				"aws",
-				cloudwatchAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *metricAlarm.AlarmName, *metricAlarm.AlarmName, "aws_cloudwatch_metric_alarm", "aws", cloudwatchAllowEmptyValues))
 		}
 		nextToken = output.NextToken
 		if nextToken == nil {
@@ -88,12 +83,7 @@ func (g *CloudWatchGenerator) createDashboards(cloudwatchSvc *cloudwatch.Client)
 			return err
 		}
 		for _, dashboardEntry := range output.DashboardEntries {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*dashboardEntry.DashboardName,
-				*dashboardEntry.DashboardName,
-				"aws_cloudwatch_dashboard",
-				"aws",
-				cloudwatchAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *dashboardEntry.DashboardName, *dashboardEntry.DashboardName, "aws_cloudwatch_dashboard", "aws", cloudwatchAllowEmptyValues))
 		}
 		nextToken = output.NextToken
 		if nextToken == nil {
@@ -113,12 +103,7 @@ func (g *CloudWatchGenerator) createRules(cloudwatcheventsSvc *cloudwatchevents.
 			return err
 		}
 		for _, rule := range output.Rules {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*rule.Name,
-				*rule.Name,
-				"aws_cloudwatch_event_rule",
-				"aws",
-				cloudwatchAllowEmptyValues))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *rule.Name, *rule.Name, "aws_cloudwatch_event_rule", "aws", cloudwatchAllowEmptyValues))
 
 			var listTargetsNextToken *string
 			for {

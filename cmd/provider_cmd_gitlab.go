@@ -28,17 +28,13 @@ func newCmdGitlabImporter(options ImportOptions) *cobra.Command {
 		Short: "Import current state to Terraform configuration from Gitlab",
 		Long:  "Import current state to Terraform configuration from Gitlab",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			// originalPathPattern := options.PathPattern
-			// for _, organization := range organizations {
-				provider := newGitlabProvider()
-			// 	options.PathPattern = originalPathPattern
-			// 	// options.PathPattern = strings.ReplaceAll(options.PathPattern, "{provider}", "{provider}/"+organization)
-			log.Println(provider.GetName() + " importing gitlan")
+			provider := newGitlabProvider()
+
+			log.Println(provider.GetName() + " importing gitlab")
 				err := Import(provider, options, []string{url, token})
 				if err != nil {
 					return err
 				}
-			// }
 
 			return nil
 		},

@@ -52,13 +52,7 @@ func (g *OrganizationProjectGenerator) InitResources() error {
 		}
 
 		for _, project := range projects {
-			resource := terraformutils.NewSimpleResource(
-				strconv.FormatInt(project.GetID(), 10),
-				strconv.FormatInt(project.GetID(), 10),
-				"github_organization_project",
-				"github",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, strconv.FormatInt(project.GetID(), 10), strconv.FormatInt(project.GetID(), 10), "github_organization_project", "github", []string{}, )
 			resource.SlowQueryRequired = true
 			g.Resources = append(g.Resources, resource)
 		}

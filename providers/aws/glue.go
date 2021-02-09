@@ -30,10 +30,7 @@ func (g *GlueGenerator) loadGlueCrawlers(svc *glue.Client) error {
 	p := glue.NewGetCrawlersPaginator(svc.GetCrawlersRequest(&glue.GetCrawlersInput{}))
 	for p.Next(context.Background()) {
 		for _, crawler := range p.CurrentPage().Crawlers {
-			resource := terraformutils.NewSimpleResource(*crawler.Name, *crawler.Name,
-				"aws_glue_crawler",
-				"aws",
-				GlueCrawlerAllowEmptyValues)
+			resource := terraformutils.NewSimpleResource(0, *crawler.Name, *crawler.Name, "aws_glue_crawler", "aws", GlueCrawlerAllowEmptyValues)
 			g.Resources = append(g.Resources, resource)
 		}
 	}
@@ -49,10 +46,7 @@ func (g *GlueGenerator) loadGlueCatalogDatabase(svc *glue.Client, account *strin
 			// CATALOG-ID is AWS Account ID
 			// https://docs.aws.amazon.com/cli/latest/reference/glue/create-database.html#options
 			id := *account + ":" + *catalogDatabase.Name
-			resource := terraformutils.NewSimpleResource(id, *catalogDatabase.Name,
-				"aws_glue_catalog_database",
-				"aws",
-				GlueCatalogDatabaseAllowEmptyValues)
+			resource := terraformutils.NewSimpleResource(0, id, *catalogDatabase.Name, "aws_glue_catalog_database", "aws", GlueCatalogDatabaseAllowEmptyValues)
 			g.Resources = append(g.Resources, resource)
 			databaseNames = append(databaseNames, catalogDatabase.Name)
 		}
@@ -70,10 +64,7 @@ func (g *GlueGenerator) loadGlueCatalogTable(svc *glue.Client, account *string, 
 		for _, catalogTable := range p.CurrentPage().TableList {
 			databaseTable := *databaseName + ":" + *catalogTable.Name
 			id := *account + ":" + databaseTable
-			resource := terraformutils.NewSimpleResource(id, databaseTable,
-				"aws_glue_catalog_table",
-				"aws",
-				GlueCatalogTableAllowEmptyValues)
+			resource := terraformutils.NewSimpleResource(0, id, databaseTable, "aws_glue_catalog_table", "aws", GlueCatalogTableAllowEmptyValues)
 			g.Resources = append(g.Resources, resource)
 		}
 	}

@@ -28,12 +28,7 @@ type RDNSGenerator struct {
 func (g RDNSGenerator) createResources(instanceIPList []linodego.InstanceIP) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, instanceIP := range instanceIPList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			instanceIP.Address,
-			instanceIP.Address,
-			"linode_rdns",
-			"linode",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, 0, instanceIP.Address, instanceIP.Address, "linode_rdns", "linode"))
 	}
 	return resources
 }

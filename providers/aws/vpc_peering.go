@@ -32,13 +32,7 @@ type VpcPeeringConnectionGenerator struct {
 func (g *VpcPeeringConnectionGenerator) createResources(peerings *ec2.DescribeVpcPeeringConnectionsOutput) []terraformutils.Resource {
 	resources := []terraformutils.Resource{}
 	for _, peering := range peerings.VpcPeeringConnections {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			aws.StringValue(peering.VpcPeeringConnectionId),
-			aws.StringValue(peering.VpcPeeringConnectionId),
-			"aws_vpc_peering_connection",
-			"aws",
-			peeringAllowEmptyValues,
-		))
+		resources = append(resources, terraformutils.NewSimpleResource(0, aws.StringValue(peering.VpcPeeringConnectionId), aws.StringValue(peering.VpcPeeringConnectionId), "aws_vpc_peering_connection", "aws", peeringAllowEmptyValues, ))
 	}
 
 	return resources

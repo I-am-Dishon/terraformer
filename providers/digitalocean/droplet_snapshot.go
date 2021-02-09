@@ -58,12 +58,7 @@ func (g DropletSnapshotGenerator) listDropletSnapshots(ctx context.Context, clie
 func (g DropletSnapshotGenerator) createResources(snapshotList []godo.Snapshot) []terraformutils.Resource {
 	var resources []terraformutils.Resource
 	for _, snapshot := range snapshotList {
-		resources = append(resources, terraformutils.NewSimpleResource(
-			snapshot.ID,
-			snapshot.Name,
-			"digitalocean_droplet_snapshot",
-			"digitalocean",
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, snapshot.ID, snapshot.Name, "digitalocean_droplet_snapshot", "digitalocean", []string{}))
 	}
 	return resources
 }

@@ -39,12 +39,7 @@ func (g *CodeCommitGenerator) InitResources() error {
 	for p.Next(context.Background()) {
 		for _, repository := range p.CurrentPage().Repositories {
 			resourceName := aws.StringValue(repository.RepositoryName)
-			resources = append(resources, terraformutils.NewSimpleResource(
-				resourceName,
-				resourceName,
-				"aws_codecommit_repository",
-				"aws",
-				codecommitAllowEmptyValues))
+			resources = append(resources, terraformutils.NewSimpleResource(0, resourceName, resourceName, "aws_codecommit_repository", "aws", codecommitAllowEmptyValues))
 		}
 	}
 	g.Resources = resources

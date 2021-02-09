@@ -46,13 +46,7 @@ func (g *EmrGenerator) addClusters(client *emr.Client) error {
 	p := emr.NewListClustersPaginator(client.ListClustersRequest(&emr.ListClustersInput{}))
 	for p.Next(context.Background()) {
 		for _, cluster := range p.CurrentPage().Clusters {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*cluster.Id,
-				*cluster.Name,
-				"aws_emr_cluster",
-				"aws",
-				emrAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *cluster.Id, *cluster.Name, "aws_emr_cluster", "aws", emrAllowEmptyValues, ))
 		}
 	}
 	return p.Err()
@@ -62,13 +56,7 @@ func (g *EmrGenerator) addSecurityConfigurations(client *emr.Client) error {
 	p := emr.NewListSecurityConfigurationsPaginator(client.ListSecurityConfigurationsRequest(&emr.ListSecurityConfigurationsInput{}))
 	for p.Next(context.Background()) {
 		for _, securityConfiguration := range p.CurrentPage().SecurityConfigurations {
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*securityConfiguration.Name,
-				*securityConfiguration.Name,
-				"aws_emr_security_configuration",
-				"aws",
-				emrAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *securityConfiguration.Name, *securityConfiguration.Name, "aws_emr_security_configuration", "aws", emrAllowEmptyValues, ))
 		}
 	}
 	return p.Err()

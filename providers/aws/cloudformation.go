@@ -40,13 +40,7 @@ func (g *CloudFormationGenerator) InitResources() error {
 			if stackSummary.StackStatus == cloudformation.StackStatusDeleteComplete {
 				continue
 			}
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				*stackSummary.StackId,
-				*stackSummary.StackName,
-				"aws_cloudformation_stack",
-				"aws",
-				cloudFormationAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *stackSummary.StackId, *stackSummary.StackName, "aws_cloudformation_stack", "aws", cloudFormationAllowEmptyValues, ))
 		}
 	}
 	if err := p.Err(); err != nil {
@@ -60,13 +54,7 @@ func (g *CloudFormationGenerator) InitResources() error {
 		if stackSetSummary.Status == cloudformation.StackSetStatusDeleted {
 			continue
 		}
-		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-			*stackSetSummary.StackSetId,
-			*stackSetSummary.StackSetName,
-			"aws_cloudformation_stack_set",
-			"aws",
-			cloudFormationAllowEmptyValues,
-		))
+		g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, *stackSetSummary.StackSetId, *stackSetSummary.StackSetName, "aws_cloudformation_stack_set", "aws", cloudFormationAllowEmptyValues, ))
 
 		stackSetInstances, err := svc.ListStackInstancesRequest(&cloudformation.ListStackInstancesInput{
 			StackSetName: stackSetSummary.StackSetName,
@@ -77,13 +65,7 @@ func (g *CloudFormationGenerator) InitResources() error {
 		for _, stackSetI := range stackSetInstances.Summaries {
 			id := aws.StringValue(stackSetI.StackSetId) + "," + aws.StringValue(stackSetI.Account) + "," + aws.StringValue(stackSetI.Region)
 
-			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(
-				id,
-				id,
-				"aws_cloudformation_stack_set_instance",
-				"aws",
-				cloudFormationAllowEmptyValues,
-			))
+			g.Resources = append(g.Resources, terraformutils.NewSimpleResource(0, id, id, "aws_cloudformation_stack_set_instance", "aws", cloudFormationAllowEmptyValues, ))
 		}
 	}
 

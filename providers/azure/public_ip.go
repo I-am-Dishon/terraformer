@@ -49,12 +49,7 @@ func (g *PublicIPGenerator) listAndAddForPublicIPAddress() ([]terraformutils.Res
 	}
 	for publicIPAddressIterator.NotDone() {
 		publicIP := publicIPAddressIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*publicIP.ID,
-			*publicIP.Name,
-			"azurerm_public_ip",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *publicIP.ID, *publicIP.Name, "azurerm_public_ip", g.ProviderName, []string{}))
 
 		if err := publicIPAddressIterator.Next(); err != nil {
 			log.Println(err)
@@ -87,12 +82,7 @@ func (g *PublicIPGenerator) listAndAddForPublicIPPrefix() ([]terraformutils.Reso
 	}
 	for publicIPPrefixIterator.NotDone() {
 		publicIPPrefix := publicIPPrefixIterator.Value()
-		resources = append(resources, terraformutils.NewSimpleResource(
-			*publicIPPrefix.ID,
-			*publicIPPrefix.Name,
-			"azurerm_public_ip_prefix",
-			g.ProviderName,
-			[]string{}))
+		resources = append(resources, terraformutils.NewSimpleResource(0, *publicIPPrefix.ID, *publicIPPrefix.Name, "azurerm_public_ip_prefix", g.ProviderName, []string{}))
 
 		if err := publicIPPrefixIterator.Next(); err != nil {
 			log.Println(err)

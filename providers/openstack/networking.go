@@ -40,13 +40,7 @@ func (g *NetworkingGenerator) createSecgroupResources(list *pagination.Pager) []
 		}
 
 		for _, grp := range groups {
-			resource := terraformutils.NewSimpleResource(
-				grp.ID,
-				grp.Name,
-				"openstack_networking_secgroup_v2",
-				"openstack",
-				[]string{},
-			)
+			resource := terraformutils.NewSimpleResource(0, grp.ID, grp.Name, "openstack_networking_secgroup_v2", "openstack", []string{}, )
 			resources = append(resources, resource)
 			resources = append(resources, g.createSecgroupRuleResources(grp.Rules)...)
 		}
@@ -63,13 +57,7 @@ func (g *NetworkingGenerator) createSecgroupResources(list *pagination.Pager) []
 func (g *NetworkingGenerator) createSecgroupRuleResources(rules []rules.SecGroupRule) []terraformutils.Resource {
 	resources := []terraformutils.Resource{}
 	for _, r := range rules {
-		resource := terraformutils.NewSimpleResource(
-			r.ID,
-			r.ID,
-			"openstack_networking_secgroup_rule_v2",
-			"openstack",
-			[]string{},
-		)
+		resource := terraformutils.NewSimpleResource(0, r.ID, r.ID, "openstack_networking_secgroup_rule_v2", "openstack", []string{}, )
 		resources = append(resources, resource)
 	}
 	return resources
