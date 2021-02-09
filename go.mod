@@ -6,17 +6,17 @@ require (
 	cloud.google.com/go v0.74.0
 	cloud.google.com/go/logging v1.1.2
 	cloud.google.com/go/storage v1.12.0
-	github.com/Azure/azure-sdk-for-go v42.0.0+incompatible
+	github.com/Azure/azure-sdk-for-go v42.3.0+incompatible
 	github.com/Azure/azure-storage-blob-go v0.10.0
 	github.com/Azure/go-autorest/autorest v0.11.12
-	github.com/DataDog/datadog-api-client-go v1.0.0-beta.9
+	github.com/DataDog/datadog-api-client-go v1.0.0-beta.14
 	github.com/IBM-Cloud/bluemix-go v0.0.0-20201210085054-cdf09378fdd9
 	github.com/IBM/go-sdk-core/v3 v3.3.1
 	github.com/IBM/go-sdk-core/v4 v4.9.0
 	github.com/IBM/ibm-cos-sdk-go v1.5.0
 	github.com/IBM/keyprotect-go-client v0.5.2
 	github.com/IBM/networking-go-sdk v0.12.1
-	github.com/IBM/vpc-go-sdk v0.3.1
+	github.com/IBM/vpc-go-sdk v0.4.1
 	github.com/OctopusDeploy/go-octopusdeploy v1.6.0
 	github.com/aliyun/alibaba-cloud-sdk-go v1.60.295
 	github.com/aliyun/aliyun-tablestore-go-sdk v4.1.2+incompatible
@@ -61,8 +61,8 @@ require (
 	google.golang.org/api v0.36.0
 	google.golang.org/genproto v0.0.0-20201210142538-e3217bee35cc
 	gopkg.in/jarcoal/httpmock.v1 v1.0.0-00010101000000-000000000000 // indirect
-	k8s.io/apimachinery v0.20.1
-	k8s.io/client-go v0.20.1
+	k8s.io/apimachinery v0.20.2
+	k8s.io/client-go v0.20.2
 )
 
 replace gopkg.in/jarcoal/httpmock.v1 => github.com/jarcoal/httpmock v1.0.5

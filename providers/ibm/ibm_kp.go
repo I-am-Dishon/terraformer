@@ -31,15 +31,29 @@ type KPGenerator struct {
 	IBMService
 }
 
-func (g KPGenerator) loadKP(kpID, kpName string) terraformutils.Resource {
+func (g KPGenerator) loadKP(kpID, kpGuid string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, kpID, kpID, "ibm_resource_instance", "ibm", []string{})
+	resources = terraformutils.NewSimpleResource(
+		kpID,
+		kpGuid,
+		"ibm_resource_instance",
+		"ibm",
+		[]string{})
 	return resources
 }
 
-func (g KPGenerator) loadkPKeys(kpKeyCRN, kpKeyID string) terraformutils.Resource {
+func (g KPGenerator) loadkPKeys(kpKeyCRN, kpKeyID string, dependsOn []string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, kpKeyCRN, kpKeyID, "ibm_kms_key", "ibm", []string{})
+	resources = terraformutils.NewResource(
+		kpKeyCRN,
+		kpKeyID,
+		"ibm_kms_key",
+		"ibm",
+		map[string]string{},
+		[]string{},
+		map[string]interface{}{
+			"depends_on": dependsOn,
+		})
 	return resources
 }
 
@@ -86,7 +100,7 @@ func (g *KPGenerator) InitResources() error {
 		return err
 	}
 	for _, kp := range kpInstances {
-		g.Resources = append(g.Resources, g.loadKP(kp.ID, kp.Name))
+		g.Resources = append(g.Resources, g.loadKP(kp.ID, kp.Guid))
 		client.Config.InstanceID = kp.Guid
 
 		output, err := client.GetKeys(context.Background(), 100, 0)
@@ -94,7 +108,10 @@ func (g *KPGenerator) InitResources() error {
 			return err
 		}
 		for _, key := range output.Keys {
-			g.Resources = append(g.Resources, g.loadkPKeys(key.CRN, key.ID))
+			var dependsOn []string
+			dependsOn = append(dependsOn,
+				"ibm_resource_instance."+terraformutils.TfSanitize(kp.Guid))
+			g.Resources = append(g.Resources, g.loadkPKeys(key.CRN, key.ID, dependsOn))
 		}
 
 	}

@@ -42,9 +42,18 @@ func (g COSGenerator) loadCOS(cosID string, cosName string) terraformutils.Resou
 	return resources
 }
 
-func (g COSGenerator) loadCOSBuckets(bucketID, bucketName string) terraformutils.Resource {
+func (g COSGenerator) loadCOSBuckets(bucketID, bucketName string, dependsOn []string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, bucketID, bucketName, "ibm_cos_bucket", "ibm", []string{})
+	resources = terraformutils.NewResource(
+		bucketID,
+		bucketName,
+		"ibm_cos_bucket",
+		"ibm",
+		map[string]string{},
+		[]string{},
+		map[string]interface{}{
+			"depends_on": dependsOn,
+		})
 	return resources
 }
 
@@ -89,6 +98,9 @@ func (g *COSGenerator) InitResources() error {
 		crossRegionLocationRegex, _ := regexp.Compile("^[a-z]{2}-[a-z]{4,8}$")
 		d, _ := s3Client.ListBucketsExtended(&coss3.ListBucketsExtendedInput{})
 		for _, b := range d.Buckets {
+			var dependsOn []string
+			dependsOn = append(dependsOn,
+				"ibm_resource_instance."+terraformutils.TfSanitize(cs.Name))
 			var apiType, location string
 			bLocationConstraint := *b.LocationConstraint
 			if singleSiteLocationRegex.MatchString(bLocationConstraint) {
@@ -104,7 +116,7 @@ func (g *COSGenerator) InitResources() error {
 				location = strings.Split(bLocationConstraint, "-")[0]
 			}
 			bucketID := fmt.Sprintf("%s:%s:%s:meta:%s:%s", strings.Replace(cs.ID, "::", "", -1), "bucket", *b.Name, apiType, location)
-			g.Resources = append(g.Resources, g.loadCOSBuckets(bucketID, *b.Name))
+			g.Resources = append(g.Resources, g.loadCOSBuckets(bucketID, *b.Name, dependsOn))
 		}
 	}
 

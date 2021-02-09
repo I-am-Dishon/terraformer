@@ -24,6 +24,7 @@ import (
 	"github.com/IBM/vpc-go-sdk/vpcv1"
 )
 
+// SecurityGroupGenerator ...
 type SecurityGroupGenerator struct {
 	IBMService
 }
@@ -34,12 +35,22 @@ func (g SecurityGroupGenerator) createSecurityGroupResources(sgID, sgName string
 	return resources
 }
 
-func (g SecurityGroupGenerator) createSecurityGroupRuleResources(sgID, sgRuleID string) terraformutils.Resource {
+func (g SecurityGroupGenerator) createSecurityGroupRuleResources(sgID, sgRuleID string, dependsOn []string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s.%s", sgID, sgRuleID), sgRuleID, "ibm_is_security_group_rule", "ibm", []string{})
+	resources = terraformutils.NewResource(
+		fmt.Sprintf("%s.%s", sgID, sgRuleID),
+		sgRuleID,
+		"ibm_is_security_group_rule",
+		"ibm",
+		map[string]string{},
+		[]string{},
+		map[string]interface{}{
+			"depends_on": dependsOn,
+		})
 	return resources
 }
 
+// InitResources ...
 func (g *SecurityGroupGenerator) InitResources() error {
 	var resoureGroup string
 	region := envFallBack([]string{"IC_REGION"}, "us-south")
@@ -86,6 +97,9 @@ func (g *SecurityGroupGenerator) InitResources() error {
 	}
 
 	for _, group := range allrecs {
+		var dependsOn []string
+		dependsOn = append(dependsOn,
+			"ibm_is_security_group"+terraformutils.TfSanitize(*group.Name))
 		g.Resources = append(g.Resources, g.createSecurityGroupResources(*group.ID, *group.Name))
 		listSecurityGroupRulesOptions := &vpcv1.ListSecurityGroupRulesOptions{
 			SecurityGroupID: group.ID,
@@ -99,19 +113,19 @@ func (g *SecurityGroupGenerator) InitResources() error {
 			case "*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolIcmp":
 				{
 					rule := sgrule.(*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolIcmp)
-					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID))
+					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID, dependsOn))
 				}
 
 			case "*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolAll":
 				{
 					rule := sgrule.(*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolAll)
-					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID))
+					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID, dependsOn))
 				}
 
 			case "*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolTcpudp":
 				{
 					rule := sgrule.(*vpcv1.SecurityGroupRuleSecurityGroupRuleProtocolTcpudp)
-					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID))
+					g.Resources = append(g.Resources, g.createSecurityGroupRuleResources(*group.ID, *rule.ID, dependsOn))
 				}
 			}
 		}

@@ -34,15 +34,33 @@ func (g ContainerClusterGenerator) loadcluster(clustersID, clusterName string) t
 	return resources
 }
 
-func (g ContainerClusterGenerator) loadWorkerPools(clustersID, poolID, PoolName string) terraformutils.Resource {
+func (g ContainerClusterGenerator) loadWorkerPools(clustersID, poolID string, dependsOn []string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s", clustersID, poolID), PoolName, "ibm_container_worker_pool", "ibm", []string{})
+	resources = terraformutils.NewResource(
+		fmt.Sprintf("%s/%s", clustersID, poolID),
+		poolID,
+		"ibm_container_worker_pool",
+		"ibm",
+		map[string]string{},
+		[]string{},
+		map[string]interface{}{
+			"depends_on": dependsOn,
+		})
 	return resources
 }
 
-func (g ContainerClusterGenerator) loadWorkerPoolZones(clustersID, poolID, zoneID string) terraformutils.Resource {
+func (g ContainerClusterGenerator) loadWorkerPoolZones(clustersID, poolID, zoneID string, dependsOn []string) terraformutils.Resource {
 	var resources terraformutils.Resource
-	resources = terraformutils.NewSimpleResource(0, fmt.Sprintf("%s/%s/%s", clustersID, poolID, zoneID), zoneID, "ibm_container_worker_pool_zone_attachment", "ibm", []string{})
+	resources = terraformutils.NewResource(
+		fmt.Sprintf("%s/%s/%s", clustersID, poolID, zoneID),
+		fmt.Sprintf("%s/%s/%s", clustersID, poolID, zoneID),
+		"ibm_container_worker_pool_zone_attachment",
+		"ibm",
+		map[string]string{},
+		[]string{},
+		map[string]interface{}{
+			"depends_on": dependsOn,
+		})
 	return resources
 }
 
@@ -72,11 +90,16 @@ func (g *ContainerClusterGenerator) InitResources() error {
 		}
 		for _, pool := range workerPools {
 			if pool.Name != "default" {
-				g.Resources = append(g.Resources, g.loadWorkerPools(cs.ID, pool.ID, pool.Name))
+				var dependsOn []string
+				dependsOn = append(dependsOn,
+					"ibm_container_cluster."+terraformutils.TfSanitize(cs.Name))
+				g.Resources = append(g.Resources, g.loadWorkerPools(cs.ID, pool.ID, dependsOn))
 
+				dependsOn = append(dependsOn,
+					"ibm_container_worker_pool."+terraformutils.TfSanitize(pool.ID))
 				zones := pool.Zones
 				for _, zone := range zones {
-					g.Resources = append(g.Resources, g.loadWorkerPoolZones(cs.ID, pool.ID, zone.ID))
+					g.Resources = append(g.Resources, g.loadWorkerPoolZones(cs.ID, pool.ID, zone.ID, dependsOn))
 				}
 			}
 		}
